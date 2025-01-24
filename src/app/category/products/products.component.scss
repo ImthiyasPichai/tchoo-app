@@ -19,7 +19,7 @@
     /* PAGE HEADER */
     .page-header {
         a {
-            color: #000000;
+            color: #00525b;
             font-weight: 500;
             font-size: 14px;
             vertical-align: middle;
@@ -98,14 +98,14 @@
                 }
 
                 &:hover {
-                    color: #000000;
+                    color: #00525b;
                 }
             }
 
             h3 {
                 display: flex;
                 align-items: center;
-                color: #000000;
+                color: #00525b;
                 font-weight: 400;
                 font-size: 16px;
                 line-height: 28px;
@@ -298,11 +298,30 @@
             align-items: center;
             justify-content: center;
             background: rgb(255 255 255);
-           
+            .wishlist-icon {
+                cursor: pointer;
+                transition: transform 0.2s ease-in-out;
+            }
+            
+            .wishlist-icon.active {
+                animation: pop 0.3s ease-out;
+            }
+            
+            @keyframes pop {
+                0% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(2);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
         }
 
         span {
-            color: #000000;
+            color: #00525b;
             font-weight: 500;
             font-size: 14px;
             vertical-align: middle;
@@ -343,7 +362,7 @@
     /* CATEGORY DETAILS VARIANTS */
     .category-details-variants {
         h2 {
-            color: #444444;
+            color: #00525b;
             font-size: 14px;
             line-height: 24px;
             padding: 0 20px;
@@ -394,7 +413,7 @@
                     }
 
                     p {
-                        color: #000000;
+                        color: #00525b;
                         font-weight: 500;
                         font-size: 16px;
                         line-height: 26px;
@@ -469,7 +488,7 @@
                                 background-color: transparent;
                             }
                             &:hover {
-                                border-color: #DF3737;
+                                border-color: #00525b;
                             }
 
                             .variant-name {
@@ -485,7 +504,7 @@
                             background: rgba(36, 114, 205, 0.1);
                             border: 1px solid #2472CD;
                             &.circle {
-                                border-color: #DF3737;
+                                border-color: #00525b;
                                 background-color: transparent;
                             }
                         }
@@ -504,7 +523,7 @@
 
             .prduct-details {
                 h3 {
-                    color: #444444;
+                    color: #00525b;
                     font-weight: 600;
                     font-size: 18px;
                     line-height: 24px;
@@ -549,7 +568,7 @@
                     justify-content: space-between;
 
                     h4 {
-                        color: #222222;
+                        color: #00525b;
                         font-weight: 500;
                         font-size: 20px;
                         line-height: 30px;
@@ -563,7 +582,7 @@
                 }
 
                 .product-des {
-                    color: #423e3e;
+                    color: #00525b;
                     font-weight: 400;
                     font-size: 14px;
                     line-height: 22px;
@@ -581,7 +600,7 @@
 }
 
                 h5 {
-                    color: #444444;
+                    color: #00525b;
                     font-weight: 400;
                     font-size: 16px;
                     line-height: 24px;
@@ -589,7 +608,7 @@
                 }
 
                 h6 {
-                    color: #444444;
+                    color: #00525b;
                     font-weight: 700;
                     font-size: 16px;
                     line-height: 24px;
@@ -603,7 +622,7 @@
 
 
                     h4 {
-                        color: #222222;
+                        color: #00525b;
                         font-weight: 600;
                         font-size: 18px;
                         line-height: 36px;
@@ -624,7 +643,7 @@
                     list-style-type: circle;
 
                     li {
-                        color: #444444;
+                        color: #00525b;
                         font-weight: 400;
                         font-size: 14px;
                         line-height: 22px;
@@ -666,7 +685,7 @@
 
             button,
             a {
-                color: #222222;
+                color: #00525b;
                 height: 50px;
                 border: 0;
                 font-size: 14px;
@@ -734,7 +753,7 @@
             .minus,
             .plus {
                 cursor: pointer;
-                color: #222222;
+                color: #00525b;
                 width: 30px;
                 height: 30px;
                 text-align: center;
@@ -785,12 +804,12 @@
             justify-content: end;
             background-color: #ffffff;
             a {
-                color: #423e3e;
+                color: #00525b;
                 i {
                     font-size: 20px;
                 }
                 &:hover {
-                    color: #000000;
+                    color: #00525b;
                 }
             }
         }

@@ -164,6 +164,41 @@
         overflow-x: hidden;
         position: relative;
 
+        .added-wish-list {
+            position: relative;
+          }
+          
+          .wishlist-icon {
+            font-size: 18px;
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            color: gray;
+            overflow: hidden;
+          }
+          
+          .wishlist-icon.filled {
+            color: gray;
+          }
+          
+          .wishlist-icon.filled::after {
+            content: "";
+            position: absolute;
+            top: 100%; /* Start below the heart */
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: red;
+            transition: top 0.5s ease; /* Smooth transition */
+            z-index: -1; /* Place behind the icon */
+          }
+          
+          .wishlist-icon.filled.animate::after {
+            top: 0; /* Animate filling from bottom to top */
+          }
+          
+          
+         
         .special-offer-badge {
             margin: 2px;
             z-index: 97;
@@ -250,7 +285,7 @@
 
         }
 
-        .added-wish-list {
+        .added-wish-list  {
             color: #999999;
             position: absolute;
             top: 10px;
@@ -263,6 +298,7 @@
             align-items: center;
             justify-content: center;
             background: rgb(255 255 255);
+           
         }
 
         span {

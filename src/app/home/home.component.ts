@@ -12,6 +12,7 @@ import { BannerDTOs } from '../_common/DTOs/Home/BannerDTOs';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
+
 export class HomeComponent {
 
   createdBy: any = this.activatedRoute.snapshot.params['userId'];
@@ -329,6 +330,17 @@ export class HomeComponent {
       },
     });
   }
+  handleAutoPlay(videoElement: HTMLVideoElement): void {
+    videoElement.muted = false; // Unmute the video
+    videoElement.play()
+      .then(() => {
+        console.log('Video is playing with sound.');
+      })
+      .catch((error) => {
+        console.warn('Auto-play failed:', error);
+      });
+  }
+
   /* PRODUCT DETAILS PAGE  */
   producdetailspage(itemId: any) {
     if (this.catIds == '') {

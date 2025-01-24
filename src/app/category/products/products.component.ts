@@ -641,11 +641,16 @@ displayImagArray:any=[]
 
   //add to wishlist
   addedWishlist(item: any) {
+    setTimeout(() => {
+      const icon = document.querySelector('.wishlist-icon.filled') as HTMLElement;
+      if (icon) {
+        icon.classList.add('animate');
+      }
+    }, 0);
     if (this.createdBy == '0') {
       this.returnurl = '/SignIn/Goback'
       window.location.href = this.returnurl;
     } else {
-      this.app.pageLoader = true;
       item.customerId = this.createdBy;
       item.priceId = this.cartlist?.pricelist[0].priceId;
       this.categoryservices.addWishList(item).subscribe({
@@ -665,7 +670,8 @@ displayImagArray:any=[]
 
   // remove from wishlist
   removeWishlist(id: any) {
-    this.app.pageLoader = true;
+    this.product.isWishlisted = 'false';
+
     this.categoryservices.removeWishlist(id).subscribe({
       next: (d: any) => {
         this.app.openSnackBar('Removed from wishlist successfully');
@@ -712,4 +718,22 @@ displayImagArray:any=[]
     backgroundColor: 'rgba(0,0,0,0)' // Makes the pinch zoom container color to transparent. So that ionic themes can be applied without issues.
   };
 
+  bubbles: { x: number; y: number; size: number }[] = [];
+
+  addBubbles(event: MouseEvent) {
+    for (let i = 0; i < 5; i++) {
+      this.bubbles.push({
+        x: event.clientX + (Math.random() - 0.5) * 50,
+        y: event.clientY + (Math.random() - 0.5) * 50,
+        size: Math.random() * 20 + 10, // Random bubble size between 10px and 30px
+      });
+    }
+
+    // Remove bubbles after animation ends (1.5 seconds)
+    setTimeout(() => {
+      this.bubbles.splice(0, 5);
+    }, 1500);
+  }
+
+  
 }

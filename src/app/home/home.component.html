@@ -9,7 +9,7 @@
       <div class="card-status" *ngIf="createdBy!=0">
         <a href="/MyCart/{{createdBy}}/{{HubId}}">
           <span class="card-count">{{mycart?.length}}</span>
-          <img src="/assets/img/icons/shopping-cart.svg" alt="search" />
+          <img src="/assets/img/icons/shopping-cart.svg" alt="noitems" />
         </a>
       </div>
     </div>
@@ -77,9 +77,9 @@
         </div>
       </div>
     </ngx-slick-carousel>
+    
 
-
-  <!-- <div class="row">
+  <div class="row">
     <div class="col-6 col-md-4 col-lg-2" *ngFor="let mainCategory of getmaincategory"
       (click)="getAllCategory(mainCategory.mainCategoryId)">
       <div class="common-card card">
@@ -93,7 +93,7 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </div>
 </div>
      
@@ -167,8 +167,33 @@
       </div>
     </div>
   </div>
+  
   <!-- PAGE COMMON WRAPPER -->
   <app-recentlyviewed></app-recentlyviewed>
+  <div>
+    <div class="video">
+      <div class="slide" *ngFor="let baner of topBanner">
+        <div *ngIf="baner.banner_TriggerId.substring(0,3) != 'MNC'">
+          <div class="banner-img">
+            <a (click)="proddetails(baner.banner_TriggerId)">
+              <video 
+                #videoElement 
+                src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/video/Purple%20and%20White%20Modern%20Geometric%20Animated%20Youtube%20Channel%20Intro%20Video.mp4" 
+                width="100%" 
+                controls 
+                autoplay 
+                muted 
+                (loadedmetadata)="handleAutoPlay(videoElement)" 
+                playsinline>
+                Your browser does not support the video tag.
+              </video>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <div class="select-variant" [ngClass]="{ 'product-variant': variantView }">
     <div class="variant-header">
       <h2>{{selectedlanguage =='Arabic (عربي)' ?'اختر واحدة':'Choose One'}}</h2>
@@ -224,7 +249,9 @@
         </div>
       </div>
     </div>
+    
   </div>
+  
 </section>
 <!-- BOTTOM LAYOUT -->
-<!-- <app-bottom-layout></app-bottom-layout> -->
+<app-bottom-layout></app-bottom-layout>

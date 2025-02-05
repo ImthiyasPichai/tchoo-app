@@ -63,6 +63,7 @@ import { PinchZoomModule } from 'ngx-pinch-zoom';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ProductsComponent } from './category/products/products.component';
 import { SafePipe } from './safepipe';
+import { VideoPlayOnScrollDirective } from './video-play-on-scroll.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,7 +111,8 @@ import { SafePipe } from './safepipe';
     BulkOfferComponent,
     BundleOfferComponent,
     BagaOfferComponent,
-    SafePipe
+    SafePipe,
+    VideoPlayOnScrollDirective
   ],
   imports: [
   BrowserModule,

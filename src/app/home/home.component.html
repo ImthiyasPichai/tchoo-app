@@ -3,20 +3,20 @@
   <div class="user-title">
     <div class="d-flex align-items-center justify-content-between">
       <div class="title">
-        <h4>{{selectedlanguage =='Arabic (عربي)' ? 'مرحباً':'Hello'}},</h4>
-        <h3>{{userdetails?.fullName? userdetails?.fullName: 'Guest'}}</h3>
+        <h4 style="color: #1e1e1e;">{{selectedlanguage =='Arabic (عربي)' ? 'مرحباً':'Hello'}},</h4>
+        <h3 class="fw-bold" style="font-size: 30px;">{{userdetails?.fullName? userdetails?.fullName: 'Guest'}}</h3>
       </div>
       <div class="card-status" *ngIf="createdBy!=0">
         <a href="/MyCart/{{createdBy}}/{{HubId}}">
           <span class="card-count">{{mycart?.length}}</span>
-          <img src="/assets/img/icons/shopping-cart.svg" alt="noitems" />
+          <img src="/assets/img/icons/shopping-cart.svg" alt="search" />
         </a>
       </div>
     </div>
     <!-- COMMON SEARCH BOX -->
     <div class="common-search-box gap-2">
       <div class="common-search-input w-100">
-        <form (ngSubmit)="search()">
+        <form (ngSubmit)="search()" style="background-color: #f2f8f9 ;">
           <img src="/assets/img/icons/search.png" class="search-icon" alt="search" />
           <input type="text" placeholder="Search" name="searchValue" id="searchValue" [(ngModel)]="searchValue" />
         </form>
@@ -28,7 +28,6 @@
     </a> -->
     </div>
   </div>
-  <!-- BANNER SLIDER WRAPPER -->
   <div class="banner-slider-wrapper">
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="mainBanner">
       <div ngxSlickItem class="slide" *ngFor="let baner of topBanner">
@@ -51,6 +50,9 @@
       </div>
     </ngx-slick-carousel>
   </div>
+  
+  <!-- BANNER SLIDER WRAPPER -->
+ 
   <!-- PAGE COMMON WRAPPER  -->
   <div class="page-common-wrapper">
     <div class="page-common-header">
@@ -72,14 +74,14 @@
                 <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/category-images/{{mainCategory.mainCategoryId}}.png"
                 onerror="this.onerror=null; this.src='assets/img/category/no-image.png'" alt="items" width="100%" />
               </div>
-              <h5 class="text-center text-bold-600" style="color: #00525b;">{{mainCategory.name}}</h5>
+              <h5 class="text-center text-bold-600" style="color: #1e1e1e ;">{{mainCategory.name}}</h5>
           </a>
         </div>
       </div>
     </ngx-slick-carousel>
-    
 
-  <div class="row">
+
+  <!-- <div class="row">
     <div class="col-6 col-md-4 col-lg-2" *ngFor="let mainCategory of getmaincategory"
       (click)="getAllCategory(mainCategory.mainCategoryId)">
       <div class="common-card card">
@@ -93,8 +95,26 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
+<div class="video" >
+   
+          <a >
+            <video style="border-radius: 15px;"
+              #videoElement 
+              src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/video/Purple%20and%20White%20Modern%20Geometric%20Animated%20Youtube%20Channel%20Intro%20Video.mp4" 
+              width="100%" 
+              controls 
+              autoplay 
+              muted 
+              (loadedmetadata)="handleAutoPlay(videoElement)" 
+              playsinline>
+              Your browser does not support the video tag.
+            </video>
+          </a>
+      
+     
+  </div>
 </div>
      
   </div>
@@ -131,7 +151,7 @@
                 <h3>{{feat.pluName}}</h3>
               </a>
               <!-- <h6>₹ {{feat.sellingPrice}}</h6> -->
-              <p>₹ {{feat.sellingPrice}} <span class="offer-amount"
+              <p style="color: #1e1e1e;">₹ {{feat.sellingPrice}} <span class="offer-amount"
                   *ngIf="feat.offers?.length == 1">{{feat.manufracture}}</span></p>
               <!-- <p *ngIf="feat?.stockQty < 10 && feat?.stockQty != 0" class="fw-bold" style="font-size: 12px;color: #797979; margin: 0;">
              {{selectedlanguage=='Arabic (عربي)'?'مخزون محدود':'Limited Stock'}}
@@ -170,29 +190,6 @@
   
   <!-- PAGE COMMON WRAPPER -->
   <app-recentlyviewed></app-recentlyviewed>
-  <div>
-    <div class="video">
-      <div class="slide" *ngFor="let baner of topBanner">
-        <div *ngIf="baner.banner_TriggerId.substring(0,3) != 'MNC'">
-          <div class="banner-img">
-            <a (click)="proddetails(baner.banner_TriggerId)">
-              <video 
-                #videoElement 
-                src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/video/Purple%20and%20White%20Modern%20Geometric%20Animated%20Youtube%20Channel%20Intro%20Video.mp4" 
-                width="100%" 
-                controls 
-                autoplay 
-                muted 
-                (loadedmetadata)="handleAutoPlay(videoElement)" 
-                playsinline>
-                Your browser does not support the video tag.
-              </video>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   
   <div class="select-variant" [ngClass]="{ 'product-variant': variantView }">
     <div class="variant-header">
@@ -249,9 +246,12 @@
         </div>
       </div>
     </div>
+    <div>
     
   </div>
   
+  </div>
+
 </section>
 <!-- BOTTOM LAYOUT -->
-<app-bottom-layout></app-bottom-layout>
+<!-- <app-bottom-layout></app-bottom-layout> -->

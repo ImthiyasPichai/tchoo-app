@@ -120,7 +120,16 @@ export class HomeComponent {
       this.navlink.push({ url: this.router.url });
       sessionStorage.setItem("navlinkParam", JSON.stringify(this.navlink));
     }
+    window.addEventListener('scroll', this.onScroll.bind(this));
   }
+  
+  onScroll(): void {
+    const videoElement = document.querySelector('video'); // Adjust selector to target your video element
+    if (videoElement && this.isInViewport(videoElement as HTMLElement)) {
+      this.handleAutoPlay(videoElement as HTMLVideoElement);
+    }
+  }
+
   /* GET USER DETAILS */
   getuserdetails() {
     if (this.createdBy !== "0") {
@@ -139,6 +148,7 @@ export class HomeComponent {
       });
     }
   }
+ 
   /* GET address list of user */
   getAddress() {
     this.local.getAddress(this.createdBy).subscribe({
@@ -330,16 +340,31 @@ export class HomeComponent {
       },
     });
   }
-  handleAutoPlay(videoElement: HTMLVideoElement): void {
-    videoElement.muted = false; // Unmute the video
-    videoElement.play()
-      .then(() => {
-        console.log('Video is playing with sound.');
-      })
-      .catch((error) => {
-        console.warn('Auto-play failed:', error);
-      });
+  isInViewport(element: HTMLElement): boolean {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
   }
+  
+  handleAutoPlay(videoElement: HTMLVideoElement): void {
+    if (this.isInViewport(videoElement)) {
+      videoElement.muted = false; // Unmute the video
+      videoElement.play()
+        .then(() => {
+          console.log('Video is playing with sound.');
+        })
+        .catch((error) => {
+          console.warn('Auto-play failed:', error);
+        });
+    } else {
+      console.log('Video is not in the viewport yet.');
+    }
+  }
+  
 
   /* PRODUCT DETAILS PAGE  */
   producdetailspage(itemId: any) {

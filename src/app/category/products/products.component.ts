@@ -320,7 +320,9 @@ displayImagArray:any=[]
         this.app.commonLoader = false;
       },
     });
+    console.log("cartlist",this.cartlist);
   }
+  
   getImagesToDisplay(priceId:any) {
     this.displayImagArray=[]
     if(priceId){
@@ -332,6 +334,7 @@ displayImagArray:any=[]
 
     // return this.variantImages[this.selectedSize]?.concat(this.imgArray) || this.imgArray;
   }
+  
   // change variant
   varientChange(sellingprice: any, priceId: any, img: any, index: any, ishubMap: any, price: any, qty: any, stockQty: any, size: any, calledFrom: any,displayWithImg:any,imageCount:any) {
     this.app.pageLoader = true;

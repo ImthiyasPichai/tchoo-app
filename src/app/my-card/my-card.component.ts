@@ -337,7 +337,7 @@ export class MyCardComponent {
         this.isAnimating = false;
 
         // Redirect after animation completes
-        //window.location.href = `/Order/CustomerInfo/${this.createdby}/0/${this.HubId}`;
+        window.location.href = `/Order/CustomerInfo/${this.createdby}/0/${this.HubId}`;
       }, 7500);
     }
   }

@@ -47,7 +47,7 @@
     </div>
     <div class="special-offer-badge"
       *ngIf="cartlist?.product?.offers?.length == 1">
-      <span>{{(((cartlist?.product?.manufracture-cartlist?.pricelist[0]?.sellingPrice)/cartlist?.product?.manufracture)*100)
+      <span>{{(((cartlist?.product?.manufracture - cartlist?.pricelist[0]?.sellingPrice)/cartlist?.product?.manufracture)*100)
         | number : '1.0-0'}}% OFF</span>
     </div>
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel"
@@ -110,7 +110,7 @@
               <h5 class="offer-amount"
                 *ngIf="cartlist?.product?.offers?.length == 1">
                 ({{cartlist?.product?.manufracture}}
-                SR)</h5>
+                RS)</h5>
               <div class="special-offer-badge"
                 *ngIf="cartlist?.product?.offers?.length == 1">
                 {{(((cartlist?.product?.manufracture-cartlist?.pricelist[0]?.sellingPrice)/cartlist?.product?.manufracture)*100)

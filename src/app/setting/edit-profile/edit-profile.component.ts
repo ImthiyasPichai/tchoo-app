@@ -105,6 +105,7 @@ export class EditProfileComponent {
   }
   //update profile
   sendOtp() {
+    debugger
     this.submitted = true;
     if (this.details.status == "INVALID" || this.phoneForm.status == 'INVALID') {
       this.app.pageLoader = false;

@@ -130,7 +130,7 @@
       <li class="total">
         <span>{{selectedlanguage =='Arabic (عربي)'
           ?'المبلغ الإجمالي':'Total Amount'}} <p class="Inc-tax">(Inclusive of
-            VAT {{Tax?.vatTaxpercent}}%)</p></span>
+            GST {{Tax?.vatTaxpercent}}%)</p></span>
         <span>₹ {{ (TotalPrice +(DeliveryCharge)) | number : '1.0-0'}} </span>
       </li>
     </ul>

@@ -273,96 +273,99 @@ export class CustomerInfoComponent implements OnInit {
   }
   // continue to shipping
   Step1() {
-    this.app.commonLoader = true;
-    const mydata = {
-      "userId": this.createdby,
-      "cartId": this.cartId,
-      "coupenId": this.selectedCouponId ? this.selectedCouponId : 0,
-      "addId": this.selectedAdd ? this.selectedAdd : this.defaultadd.addId,
-      "hubId": this.HubId,
-      "deliveryCharge": "" + this.deliveryCharge,
-      "paymentResponse": "-",
-      "paymentMethod": "-",
-      "paymentStatus": "-",
-      "orderId": "-",
-      "transactionId": "-"
-    }
-    this.orderService.createOrder(mydata).subscribe({
-      next: (data) => {
-        this.OrderId = data
-        this.choosePayment = true;
-        this.modalPatch = true;
-      }, error: (err) => {
-        this.app.commonLoader = false;
-        // console.log(err);
-        this.app.openSnackBar('Something went wrong. Please try again later');
-      }, complete: () => {
-        this.app.commonLoader = false;
-      }
-    })
+    this.choosePayment = true;
+    
   }
 
-
+  discountPercentage: number = 50;
 
   payment(method: any) {
-   // this.app.commonLoader = true;
-    if (method === "Razorpay") {
+    console.log("selectedAddById",this.selectedAddById);
+    if (method === "Online") {
+      const discountedAmount = (this.grandTotalAmount * (1 - this.discountPercentage / 100)).toFixed(2);
+    
+  
       const razorpayOptions = {
-        description: 'Sample Razorpay',
+        key: 'rzp_live_huyaKpaJyzFXly',
+        amount: parseFloat(discountedAmount) * 100, // Convert to paise
         currency: 'INR',
-        amount: '30000', // Amount in smallest currency unit
-        name: 'Prachi',
-        key: 'rzp_test_ZwkOzbBdtSVK61',
+        name: this.selectedAddById.firstName,
+        description: 'Payment for order',
         prefill: {
-          name: 'Prachi Raut',
-          email: 'prachiraut446@gmail.com',
-          phone: '7666275213',
+          name: this.selectedAddById.firstName,
+          email: this.selectedAddById.email,
+          contact: this.selectedAddById.contact,
         },
         theme: {
-          color: '#f37254',
+          color: '#00525b',
+        },
+        handler: (response: any) => {
+          console.log('Payment successful:', response);
+          this.isOrderPlacedOverlayVisible = true;
+  
+          // Call order creation API after payment is successful
+          this.placeOrder("Online", response.razorpay_payment_id);
         },
         modal: {
           ondismiss: () => {
             console.log('Payment dismissed');
+            this.app.openSnackBar('Payment was cancelled.');
           },
         },
       };
   
-      const successCallback = (paymentId: any) => {
-        console.log('Payment successful:', paymentId);
-        this.isOrderPlacedOverlayVisible = true;
-  
-        setTimeout(() => {
-          this.isOrderPlacedOverlayVisible = false;
-          this.app.openSnackBar('Order has been placed successfully with Razorpay!');
-          this.app.commonLoader = false;
-          window.location.href = `Home/${this.createdby}`;
-        }, 3000); 
-      };
-  
-      const failureCallback = (error: any) => {
-        console.log('Payment failed:', error);
-        this.app.openSnackBar('Payment failed. Please try again.');
-        this.app.commonLoader = false;
-  
-        // Navigate to retry or error page
-        window.location.href = 'Order/CustomerInfo/ce7cf46a-bfa1-4ebe-9248-ea2de92f38dc/0/HID01';
-      };
-  
-      Razorpay.open(razorpayOptions, successCallback, failureCallback);
-    } else if (method === "COD") {
-      this.isOrderPlacedOverlayVisible = true;
-  
-      setTimeout(() => {
-        this.isOrderPlacedOverlayVisible = false;
-        this.app.openSnackBar('Order has been placed successfully with COD!');
-        window.location.href = `Home/${this.createdby}`;
-      }, 2000); 
-    } else {
+      // Open Razorpay Payment Modal
+      const razorpayInstance = new Razorpay(razorpayOptions);
+      razorpayInstance.open();
+    } 
+    else if (method === "COD") {
+      // Directly place order for COD
+      this.placeOrder("COD", "-");
+    } 
+    else {
       this.app.openSnackBar('Please select a valid payment method.');
       this.app.commonLoader = false;
     }
   }
+  
+  // Function to Place Order After Successful Payment
+  placeOrder(paymentMethod: string, transactionId: string) {
+    this.isOrderPlacedOverlayVisible = true;
+  
+    const mydata = {
+      userId: this.createdby,
+      cartId: this.cartId,
+      coupenId: this.selectedCouponId ? this.selectedCouponId : 0,
+      addId: this.selectedAdd ? this.selectedAdd : this.defaultadd.addId,
+      hubId: this.HubId,
+      deliveryCharge: this.deliveryCharge.toString(),
+      paymentResponse: transactionId,  // Store transaction ID
+      paymentMethod: paymentMethod,
+      paymentStatus: "PENDING",  // Mark as completed only if payment is done
+      orderId: "-",
+      transactionId: transactionId
+    };
+  
+    this.orderService.createOrder(mydata).subscribe({
+      next: (data) => {
+        this.OrderId = data;
+  
+        setTimeout(() => {
+          this.isOrderPlacedOverlayVisible = false;
+          //this.app.openSnackBar(`Order placed successfully with ${paymentMethod}!`);
+          window.location.href = `Home/${this.createdby}`;
+        }, 1000);
+      },
+      error: (err) => {
+        this.app.commonLoader = false;
+        this.app.openSnackBar('Something went wrong. Please try again later');
+      },
+      complete: () => {
+        this.app.commonLoader = false;
+      }
+    });
+  }
+  
 
   showSelectAddressMd() {
     this.changeAddressopen = true;

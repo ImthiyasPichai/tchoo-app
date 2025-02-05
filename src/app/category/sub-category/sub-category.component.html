@@ -63,7 +63,7 @@
         <div class="col-md-4 col-6 col-lg-2" *ngFor="let item of getItems;let i=index">
           <div class="common-card-box">
             <div class="special-offer-badge" *ngIf="item.offers?.length == 1">
-              <span>{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</span>
+              <span>{{(((item.manufracture - item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</span>
             </div>
             <!-- <div class="badge badge-lg badge-accented orange" *ngIf="item.offers?.length == 1">{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</div> -->
             <!-- <a class="added-wish-list {{item.isWishlisted}}" href="javascript:void(0)">

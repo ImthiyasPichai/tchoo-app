@@ -2,7 +2,7 @@
     padding-bottom: 50px;
     height: 100%;
     overflow-y: scroll;
-background-color: #dddcdc;
+    background-color: #f2f8f9;
    
 
     .container {
@@ -51,16 +51,17 @@ background-color: #dddcdc;
         }
     }
     .video{
-        height: 100%;
-    width: 100%;
-    padding: 5px 5px 10px 2px;
+        height: 30%;
+        width: 100%;
+        padding: 15px 15px 10px 20px;
+        border-radius: 15px;
     }
     /* USER TITLE */
     .user-title {
         padding: 20px;
         position: sticky;
         top: 0;
-        background-color: #dddcdc;
+        background-color: #f2f8f9 ;
 
         .title {
             margin-bottom: 10px;
@@ -88,7 +89,7 @@ background-color: #dddcdc;
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #dddcdc;
+            background-color: #ffffff;
 
             .card-count {
                 color: #ffffff;
@@ -110,7 +111,7 @@ background-color: #dddcdc;
         /* COMMON SEARCH BOX*/
         .common-search-box {
             z-index: 99;
-            background-color: #dddcdc;
+            background-color: #F5F5F5;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -175,7 +176,6 @@ background-color: #dddcdc;
     .banner-slider-wrapper {
         padding: 0;
         overflow-x: hidden;
-        background-color: #dddcdc;
 
         .slick-slider {
             width: 100%;
@@ -218,8 +218,8 @@ background-color: #dddcdc;
                 }
                 .category-img-wrapper {
                     .category-img {
-                        width: 60px;
-                        height: 60px;
+                        width: 80px;
+                        height: 80px;
                         border-radius: 50%;
                         overflow: hidden;
                         img {
@@ -251,12 +251,11 @@ background-color: #dddcdc;
             align-items: center;
             padding: 10px 30px;
             justify-content: space-between;
-            background-color: #dddcdc;
 
             h2 {
                 color: #00525b;
                 font-weight: 500;
-                font-size: 18px;
+                font-size: 20px;
             }
 
             a {
@@ -279,7 +278,7 @@ background-color: #dddcdc;
                     color: #00525b;
                     border-radius: 20px;
                     position: relative;
-                    background-color: #dddcdc;
+                    background-color: #ffffff;
                     border: 1px solid #e9e9e9;
 
                     .top {
@@ -354,7 +353,7 @@ background-color: #dddcdc;
                 margin-bottom: 20px;
                 border-radius: 10px;
                 overflow: hidden;
-                background-color: #dddcdc;
+                background-color: #ffffff;
                 border: 1px solid #e9e9e9;
 
                 .top {
@@ -404,7 +403,7 @@ background-color: #dddcdc;
                 height: 230px;
                 border-radius: 20px;
                 margin-bottom: 20px;
-                background-color: #dddcdc;
+                background-color: #ffffff;
                 border: 1px solid #e9e9e9;
 
                 .top {
@@ -444,7 +443,7 @@ background-color: #dddcdc;
         .category-list-bottom {
             padding: 20px 0;
             margin-bottom: 10px;
-            background-color: #00525b;
+            background-color: #000000;
 
             .feature-items-slider {
 
@@ -472,7 +471,7 @@ background-color: #dddcdc;
                 margin-bottom: 20px;
                 border-radius: 20px;
                 position: relative;
-                background-color: #dddcdc;
+                background-color: #ffffff;
                 border: 1px solid #e9e9e9;
 
 
@@ -574,7 +573,7 @@ background-color: #dddcdc;
 
     /* SELECT VARIANT */
     .select-variant {
-        background-color: #dddcdc;
+        background-color: #ffffff;
         transition: all 0.3s linear;
         -webkit-transition: all 0.3s linear;
         transform: translateY(100%);

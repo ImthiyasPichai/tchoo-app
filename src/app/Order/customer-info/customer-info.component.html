@@ -112,7 +112,7 @@
             </li>
             <li>
               <span>{{selectedlanguage =='Arabic (عربي)' ?'رسوم التوصيل':'Delivery Charges'}}</span>
-              <span>{{(productTotal)>165? 'Free':selectedlanguage =='Arabic (عربي)' ?'﷼.32 ':'SAR 32'}}</span>
+              <span>{{(productTotal)>165? 'Free':selectedlanguage =='Arabic (عربي)' ?'﷼.32 ':'RS 32'}}</span>
             </li>
             <li class="total">
               <b>{{selectedlanguage =='Arabic (عربي)' ?'المبلغ الإجمالي':'Total Amount'}}</b>
@@ -190,7 +190,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <a type="button" class="btn btn-dark w-100"
+      <a type="button" class="btn  w-100" style="background-color: #00525b; color: white;"
         href="/AddAddress/{{createdby}}/{{HubId}}/initial/customerinfo/{{cartId}}">{{selectedlanguage =='Arabic (عربي)' ?'اضف عنوان':'Add New Address'}}</a>
     </div>
   </div>
@@ -246,7 +246,16 @@
       <div class="payment-bttn">
         <button type="button" class="btn btn-default" (click)="payment('COD')">COD</button>
       </div>
+      <div class="payment-bttn">
+        <button type="button" class="btn btn-default" (click)="payment('Online')">
+          Online Payment
+          <span class="badge bg-success ms-1">{{ discountPercentage }}% Off</span>
+        </button>
+      </div>
     </div>
+    
+    
+    
   </div>
   <!-- Placeholder for order placed overlay -->
 

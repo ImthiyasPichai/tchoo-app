@@ -95,20 +95,10 @@
               <select [value]="city" class="form-select" name="city" formControlName="city"
                 [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
                 <option value="" disabled>Select your city</option>
-                <option value="Al-Bahah">Al-Bahah</option>
-                <option value="Sakakah">Sakakah</option>
-                <option value="Buraidah">Buraidah</option>
-                <option value="Abha">Abha</option>
-                <option value="Dammam">Dammam</option>
-                <option value="Ha'il">Ha'il</option>
-                <option value="Jeddah">Jeddah</option>
-                <option value="Jizan">Jizan</option>
-                <option value="Medina">Medina</option>
-                <option value="Mecca">Mecca</option>
-                <option value="Najran">Najran</option>
-                <option value="'Ar'ar">'Ar'ar</option>
-                <option value="Riyadh">Riyadh</option>
-                <option value="Tabuk">Tabuk</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Chennai">Chennai</option>
+               
               </select>
               <div *ngIf="submitted &&f['city'].errors" class="invalid-feedback">
                 <div *ngIf="f['city'].errors['required']">Please select city</div>

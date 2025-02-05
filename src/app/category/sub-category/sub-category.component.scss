@@ -38,7 +38,7 @@
         padding: 20px;
         top: 0;
         position: sticky;
-        background-color: #F5F5F5;
+        background-color: #f2f8f9;
 
         .title {
             display: flex;
@@ -202,7 +202,7 @@
 
             .offer-tag {
                 color: #ffffff;
-                background: #EB2A2A;
+                background: #00525b;
                 position: absolute;
                 z-index: 2;
                 height: 22px;
@@ -217,8 +217,8 @@
                     position: absolute;
                     height: 0;
                     width: 0;
-                    border-top: 11px solid #EB2A2A;
-                    border-bottom: 11px solid #EB2A2A;
+                    border-top: 11px solid #00525b;
+                    border-bottom: 11px solid #00525b;
                     border-right: 20px solid transparent;
                     bottom: 0;
                     right: -18px;

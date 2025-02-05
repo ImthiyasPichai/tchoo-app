@@ -15,7 +15,10 @@
 	<!-- COMMON CUSTOM SLIDER -->
 	<div class="common-custom-slider recently-view-card">
 		<div *ngFor="let item of getViewedProducts" class="common-card-box no-add-bttn">
-			<div class="special-offer-badge" *ngIf="item.offers?.length == 1"><span>{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</span></div>
+			<div class="ribbon-box-wrapper" *ngIf="item.offers?.length == 1">
+				<div class="ribbon"><span>{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</span></div>
+			</div>
+			<!-- <div class="special-offer-badge" *ngIf="item.offers?.length == 1"><span>{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</span></div> -->
 			<div class="top-img">
 				<div class="card-img">
 					<a

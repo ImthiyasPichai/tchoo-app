@@ -131,9 +131,12 @@
     <!-- COMMON CUSTOM SLIDER -->
     <div class="common-custom-slider">
       <div class="common-card-box" *ngFor="let feat of feature">
-        <div class="special-offer-badge" *ngIf="feat.offers?.length == 1">
-          <span>{{(((feat.manufracture-feat.sellingPrice)/feat.manufracture)*100) | number : '1.0-0'}}% OFF</span>
+        <div class="ribbon-box-wrapper" *ngIf="feat.offers?.length == 1">
+          <div class="ribbon"><span>{{(((feat.manufracture-feat.sellingPrice)/feat.manufracture)*100) | number : '1.0-0'}}% OFF</span></div>
         </div>
+        <!-- <div class="special-offer-badge" *ngIf="feat.offers?.length == 1">
+          <span>{{(((feat.manufracture-feat.sellingPrice)/feat.manufracture)*100) | number : '1.0-0'}}% OFF</span>
+        </div> -->
         <div class="top-img">
           <div class="card-img">
             <a

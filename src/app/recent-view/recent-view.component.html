@@ -31,7 +31,10 @@
     <div class="common-custom-slider without-scroll row">
       <div class="col-md-4 col-6 col-lg-2" *ngFor="let item of getViewedProducts;let i=index">
         <div class="common-card-box">
-          <div class="offer-tag" *ngIf="item.offers?.length == 1">{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</div>
+          <div class="ribbon-box-wrapper" *ngIf="item.offers?.length == 1">
+            <div class="ribbon"><span>{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</span></div>
+          </div>
+          <!-- <div class="offer-tag" *ngIf="item.offers?.length == 1">{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</div> -->
           <div class="top-img">
             <div class="card-img">
               <a

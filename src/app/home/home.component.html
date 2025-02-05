@@ -1,10 +1,13 @@
-<section class="home-screen {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}"
+<section
+  class="home-screen {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}"
   [ngClass]="{'modal-patch': modalPatch }">
   <div class="user-title">
     <div class="d-flex align-items-center justify-content-between">
       <div class="title">
-        <h4 style="color: #1e1e1e;">{{selectedlanguage =='Arabic (عربي)' ? 'مرحباً':'Hello'}},</h4>
-        <h3 class="fw-bold" style="font-size: 30px;">{{userdetails?.fullName? userdetails?.fullName: 'Guest'}}</h3>
+        <h4 style="color: #1e1e1e;">{{selectedlanguage =='Arabic (عربي)' ?
+          'مرحباً':'Hello'}},</h4>
+        <h3 class="fw-bold" style="font-size: 30px;">{{userdetails?.fullName?
+          userdetails?.fullName: 'Guest'}}</h3>
       </div>
       <div class="card-status" *ngIf="createdBy!=0">
         <a href="/MyCart/{{createdBy}}/{{HubId}}">
@@ -17,10 +20,12 @@
     <div class="common-search-box gap-2">
       <div class="common-search-input w-100">
         <form (ngSubmit)="search()" style="background-color: #f2f8f9 ;">
-          <img src="/assets/img/icons/search.png" class="search-icon" alt="search" />
-          <input type="text" placeholder="Search" name="searchValue" id="searchValue" [(ngModel)]="searchValue" />
+          <img src="/assets/img/icons/search.png" class="search-icon"
+            alt="search" />
+          <input type="text" placeholder="Search" name="searchValue"
+            id="searchValue" [(ngModel)]="searchValue" />
         </form>
-      
+
         <div style="display: none;">{{transcript$ | async}}</div>
       </div>
       <!-- <a href="#" class="sort-filter">
@@ -29,59 +34,69 @@
     </div>
   </div>
   <div class="banner-slider-wrapper">
-    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="mainBanner">
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel"
+      [config]="mainBanner">
       <div ngxSlickItem class="slide" *ngFor="let baner of topBanner">
         <div *ngIf="baner.banner_TriggerId.substring(0,3)!='MNC'">
           <div class="banner-img">
             <a (click)="proddetails(baner.banner_TriggerId)">
-              <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/{{baner.bannerId}}.png"
+              <img
+                src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/{{baner.bannerId}}.png"
                 alt="baner" width="100%" />
             </a>
           </div>
         </div>
         <div *ngIf="baner.banner_TriggerId.substring(0,3)=='MNC'">
           <div class="banner-img">
-            <a href="/Main-Category/SubCategory/ProductList/{{baner.banner_TriggerId}}/{{createdBy}}/{{HubId}}/asc/0/0">
-              <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/{{baner.bannerId}}.png"
-                onerror="this.onerror=null; this.src='assets/img/category/no-image.png'" alt="baner" width="100%" />
+            <a
+              href="/Main-Category/SubCategory/ProductList/{{baner.banner_TriggerId}}/{{createdBy}}/{{HubId}}/asc/0/0">
+              <img
+                src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/{{baner.bannerId}}.png"
+                onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
+                alt="baner" width="100%" />
             </a>
           </div>
         </div>
       </div>
     </ngx-slick-carousel>
   </div>
-  
+
   <!-- BANNER SLIDER WRAPPER -->
- 
+
   <!-- PAGE COMMON WRAPPER  -->
   <div class="page-common-wrapper">
     <div class="page-common-header">
       <div>
-        <h2>{{selectedlanguage =='Arabic (عربي)' ? 'تسوق حسب الفئات':'Shop by category'}} </h2>
+        <h2>{{selectedlanguage =='Arabic (عربي)' ?
+          'تسوق حسب الفئات':'Shop by category'}} </h2>
       </div>
       <div>
       </div>
     </div>
 
-<div>
-  <div class="banner-slider-wrapper">
-    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="categorySlider">
-      <div ngxSlickItem class="slide" *ngFor="let mainCategory of getmaincategory">
-       
-        <div class="category-img-wrapper">
-          <a (click)="getAllCategory(mainCategory.mainCategoryId)">
-              <div class="category-img">
-                <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/category-images/{{mainCategory.mainCategoryId}}.png"
-                onerror="this.onerror=null; this.src='assets/img/category/no-image.png'" alt="items" width="100%" />
-              </div>
-              <h5 class="text-center text-bold-600" style="color: #1e1e1e ;">{{mainCategory.name}}</h5>
-          </a>
-        </div>
-      </div>
-    </ngx-slick-carousel>
+    <div>
+      <div class="banner-slider-wrapper">
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel"
+          [config]="categorySlider">
+          <div ngxSlickItem class="slide"
+            *ngFor="let mainCategory of getmaincategory">
 
+            <div class="category-img-wrapper">
+              <a (click)="getAllCategory(mainCategory.mainCategoryId)">
+                <div class="category-img">
+                  <img
+                    src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/category-images/{{mainCategory.mainCategoryId}}.png"
+                    onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
+                    alt="items" width="100%" />
+                </div>
+                <h5 class="text-center text-bold-600"
+                  style="color: #1e1e1e ;">{{mainCategory.name}}</h5>
+              </a>
+            </div>
+          </div>
+        </ngx-slick-carousel>
 
-  <!-- <div class="row">
+        <!-- <div class="row">
     <div class="col-6 col-md-4 col-lg-2" *ngFor="let mainCategory of getmaincategory"
       (click)="getAllCategory(mainCategory.mainCategoryId)">
       <div class="common-card card">
@@ -96,44 +111,53 @@
       </div>
     </div>
   </div> -->
-</div>
-<div class="video" >
-   
-          <a >
-            <video style="border-radius: 15px;"
-              #videoElement 
-              src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/video/Purple%20and%20White%20Modern%20Geometric%20Animated%20Youtube%20Channel%20Intro%20Video.mp4" 
-              width="100%" 
-              controls 
-              autoplay 
-              muted 
-              (loadedmetadata)="handleAutoPlay(videoElement)" 
-              playsinline>
-              Your browser does not support the video tag.
-            </video>
-          </a>
-      
-     
-  </div>
-</div>
-     
+      </div>
+      <div class="video">
+
+        <a>
+          <video style="border-radius: 15px;"
+            #videoElement
+            src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/video/Purple%20and%20White%20Modern%20Geometric%20Animated%20Youtube%20Channel%20Intro%20Video.mp4"
+            width="100%"
+            controls
+            autoplay
+            muted
+            (loadedmetadata)="handleAutoPlay(videoElement)"
+            playsinline>
+            Your browser does not support the video tag.
+          </video>
+        </a>
+
+      </div>
+    </div>
+
   </div>
   <!-- PAGE COMMON WRAPPER  -->
   <div class="page-common-wrapper mb-4 mt-3" *ngIf="feature?.length >0">
     <div class="page-common-header pt-0 pb-0">
       <div>
-        <h2>{{selectedlanguage =='Arabic (عربي)' ? 'منتجات مميزة':'Featured products'}}</h2>
+        <h2>{{selectedlanguage =='Arabic (عربي)' ?
+          'منتجات مميزة':'Featured products'}}</h2>
       </div>
       <div>
-        <a href="javascript:void(0)" (click)="getAllfeature()">{{selectedlanguage =='Arabic (عربي)' ? ' اظهار الكل':'See all'}}</a>
+        <a href="javascript:void(0)"
+          (click)="getAllfeature()">{{selectedlanguage =='Arabic (عربي)' ?
+          ' اظهار الكل':'See all'}}</a>
       </div>
     </div>
     <!-- COMMON CUSTOM SLIDER -->
     <div class="common-custom-slider">
       <div class="common-card-box" *ngFor="let feat of feature">
-        <div class="ribbon-box-wrapper" *ngIf="feat.offers?.length == 1">
-          <div class="ribbon"><span>{{(((feat.manufracture-feat.sellingPrice)/feat.manufracture)*100) | number : '1.0-0'}}% OFF</span></div>
+
+        <div class="ribbon-box-wrapper" *ngIf="feat.offers?.length === 1">
+          <div class="ribbon" *ngIf="feat.offers?.offerTypes === 1">
+            <span>
+              {{ (((feat.manufracture - feat.sellingPrice) / feat.manufracture)
+              * 100) | number: '1.0-0' }}% OFF
+            </span>
+          </div>
         </div>
+
         <!-- <div class="special-offer-badge" *ngIf="feat.offers?.length == 1">
           <span>{{(((feat.manufracture-feat.sellingPrice)/feat.manufracture)*100) | number : '1.0-0'}}% OFF</span>
         </div> -->
@@ -141,7 +165,9 @@
           <div class="card-img">
             <a
               href="/Main-Category/SubCategory/Category/Products/{{feat.itemId}}/{{feat.mainCategory}}/{{createdBy}}/{{HubId}}/asc/0/0">
-              <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{feat.itemId}}_0.png" onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
+              <img
+                src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{feat.itemId}}_0.png"
+                onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
                 alt="items" />
             </a>
           </div>
@@ -154,27 +180,37 @@
                 <h3>{{feat.pluName}}</h3>
               </a>
               <!-- <h6>₹ {{feat.sellingPrice}}</h6> -->
-              <p style="color: #1e1e1e;">₹ {{feat.sellingPrice}} <span class="offer-amount"
+              <p style="color: #1e1e1e;">₹ {{feat.sellingPrice}} <span
+                  class="offer-amount"
                   *ngIf="feat.offers?.length == 1">{{feat.manufracture}}</span></p>
               <!-- <p *ngIf="feat?.stockQty < 10 && feat?.stockQty != 0" class="fw-bold" style="font-size: 12px;color: #797979; margin: 0;">
              {{selectedlanguage=='Arabic (عربي)'?'مخزون محدود':'Limited Stock'}}
             </p> -->
-              <a *ngIf="feat.isInCart == 'false' && feat.stockQty != 0" class="add-cart-bttn"
+              <a *ngIf="feat.isInCart == 'false' && feat.stockQty != 0"
+                class="add-cart-bttn"
                 (click)="addToCart(feat)">{{selectedlanguage
                 =='Arabic (عربي)'?'أضف إلى السلة':'Add to Bag'}}</a>
               <p *ngIf="feat.stockQty == 0" class="text-danger">
                 {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}
               </p>
-              <a *ngIf="feat.isInCart == 'true' && feat.relation != 1 && feat.stockQty != 0"
-                class="add-cart-bttn added-bttn" (click)="addToCart(feat)"> {{selectedlanguage =='Arabic (عربي)'?'مضاف':'Added'}} <i class="fa-solid fa-pen-to-square"></i></a>
-              <div class="add-cart-box" *ngIf="feat.isInCart == 'true' && feat.relation == 1 && feat.stockQty !=0">
+              <a
+                *ngIf="feat.isInCart == 'true' && feat.relation != 1 && feat.stockQty != 0"
+                class="add-cart-bttn added-bttn" (click)="addToCart(feat)">
+                {{selectedlanguage =='Arabic (عربي)'?'مضاف':'Added'}} <i
+                  class="fa-solid fa-pen-to-square"></i></a>
+              <div class="add-cart-box"
+                *ngIf="feat.isInCart == 'true' && feat.relation == 1 && feat.stockQty !=0">
                 <div *ngFor="let cart of mycart">
                   <div class="product-qty" *ngIf="feat.itemId == cart.itemId">
-                    <span class="minus" (click)="handleMinus(cart)"><i class="fa-solid fa-minus"></i></span>
-                    <input type="number" class="count" id="{{cart.id + '_productId'}}" min="0"
+                    <span class="minus" (click)="handleMinus(cart)"><i
+                        class="fa-solid fa-minus"></i></span>
+                    <input type="number" class="count"
+                      id="{{cart.id + '_productId'}}" min="0"
                       oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : ''"
-                      value="{{cart.quantity?cart.quantity:1}}" (keyup)="onInputUpdateqty(cart,$event.target)" />
-                    <span class="plus" (click)="handlePlus(cart)"><i class="fa-solid fa-plus"></i></span>
+                      value="{{cart.quantity?cart.quantity:1}}"
+                      (keyup)="onInputUpdateqty(cart,$event.target)" />
+                    <span class="plus" (click)="handlePlus(cart)"><i
+                        class="fa-solid fa-plus"></i></span>
                   </div>
                 </div>
               </div>
@@ -190,10 +226,10 @@
       </div>
     </div>
   </div>
-  
+
   <!-- PAGE COMMON WRAPPER -->
   <app-recentlyviewed></app-recentlyviewed>
-  
+
   <div class="select-variant" [ngClass]="{ 'product-variant': variantView }">
     <div class="variant-header">
       <h2>{{selectedlanguage =='Arabic (عربي)' ?'اختر واحدة':'Choose One'}}</h2>
@@ -202,7 +238,8 @@
     <div class="variant-body">
       <div class="variant-product">
         <div class="img">
-          <img src="{{displayImg}}" onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
+          <img src="{{displayImg}}"
+            onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
             alt="product" />
         </div>
         <div>
@@ -212,37 +249,53 @@
       </div>
 
       <div class="variants-details">
-        <h2>{{selectedlanguage =='Arabic (عربي)' ?'المتغيرات:':'Variants:'}}</h2>
+        <h2>{{selectedlanguage =='Arabic (عربي)'
+          ?'المتغيرات:':'Variants:'}}</h2>
         <div class="variants-details-wrapper">
-          <div class="variants-card" *ngFor="let v of cartlist?.pricelist;let i=index;">
+          <div class="variants-card"
+            *ngFor="let v of cartlist?.pricelist;let i=index;">
             <!-- <div class="variants-card-img" (click)="varientChange(v.sellingPrice, v.priceId,i, v.itemId,v.stockQty)"
               [ngClass]="{ active: v.sellingPrice == selectedPrice }"><i class="fa-solid fa-circle-check active-check"
                 *ngIf="v.ishubMap == 'true'"></i>
               <img src="{{v.imagePath}}" alt="variant" />
             </div> -->
-            <div class="variants-item circle" (click)="varientChange(v.sellingPrice, v.priceId,i, v.itemId,v.stockQty)" [ngClass]="{ active: v.sellingPrice == selectedPrice }">
-              <i class="fa-solid fa-circle-check active-check" *ngIf="v.ishubMap == 'true'"></i>
-              <div class="variant-name"  *ngIf="!v.displayWithImg">{{ v.size }} {{ (v.measurement =='NOVAR' || 'Ut') ? '' : v.measurement }}
+            <div class="variants-item circle"
+              (click)="varientChange(v.sellingPrice, v.priceId,i, v.itemId,v.stockQty)"
+              [ngClass]="{ active: v.sellingPrice == selectedPrice }">
+              <i class="fa-solid fa-circle-check active-check"
+                *ngIf="v.ishubMap == 'true'"></i>
+              <div class="variant-name" *ngIf="!v.displayWithImg">{{ v.size }}
+                {{ (v.measurement =='NOVAR' || 'Ut') ? '' : v.measurement }}
               </div>
-              <img  *ngIf="v.displayWithImg" src="{{v.imagePath}}" onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
-                  alt="variants">
+              <img *ngIf="v.displayWithImg" src="{{v.imagePath}}"
+                onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
+                alt="variants">
             </div>
             <h3>{{ v.size }}</h3>
             <div class="continue-bttn">
               <div class="continue-bttn-divide">
-                <button type="button" class="btn btn-dark w-100" (click)="continueProduct()"
-                  *ngIf="v.ishubMap == 'false' && v.priceId == selectedSize  && !isProductOutOfStock">{{selectedlanguage =='Arabic (عربي)'
+                <button type="button" class="btn btn-dark w-100"
+                  (click)="continueProduct()"
+                  *ngIf="v.ishubMap == 'false' && v.priceId == selectedSize  && !isProductOutOfStock">{{selectedlanguage
+                  =='Arabic (عربي)'
                   ?'أضف إلى السلة':'Add to Bag'}}</button>
                 <div *ngFor="let cart of mycart">
-                  <div class="product-qty" *ngIf="v.ishubMap == 'true' && cart.pattern == selectedSize  && !isProductOutOfStock">
-                    <span class="minus" (click)="handleMinus(cart)"><i class="fa-solid fa-minus"></i></span>
-                    <input type="number" class="count" id="{{cart.id + '_productId'}}" value="{{cart.quantity?cart.quantity:1}}"  (keyup)="onInputUpdateqty(cart,$event.target)" min="0" oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : ''"/>
-                    <span class="plus" (click)="handlePlus(cart)"><i class="fa-solid fa-plus"></i></span>
+                  <div class="product-qty"
+                    *ngIf="v.ishubMap == 'true' && cart.pattern == selectedSize  && !isProductOutOfStock">
+                    <span class="minus" (click)="handleMinus(cart)"><i
+                        class="fa-solid fa-minus"></i></span>
+                    <input type="number" class="count"
+                      id="{{cart.id + '_productId'}}"
+                      value="{{cart.quantity?cart.quantity:1}}"
+                      (keyup)="onInputUpdateqty(cart,$event.target)" min="0"
+                      oninput="this.value =!!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : ''" />
+                    <span class="plus" (click)="handlePlus(cart)"><i
+                        class="fa-solid fa-plus"></i></span>
                   </div>
                 </div>
-                  <p *ngIf="isProductOutOfStock" class="text-danger">
-                    {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}
-                  </p>
+                <p *ngIf="isProductOutOfStock" class="text-danger">
+                  {{selectedlanguage=='Arabic (عربي)'?'إنتهى من المخزن':'Out Of Stock'}}
+                </p>
               </div>
             </div>
           </div>
@@ -250,9 +303,9 @@
       </div>
     </div>
     <div>
-    
-  </div>
-  
+
+    </div>
+
   </div>
 
 </section>

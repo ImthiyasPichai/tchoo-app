@@ -47,10 +47,16 @@
     </div>
 
     <div class="ribbon-box-wrapper" *ngIf="cartlist?.product?.offers?.length == 1">
-      <div class="ribbon"><span>
+      <div class="ribbon product-ribbon"><span>
         {{(((cartlist?.product?.manufracture - cartlist?.pricelist[0]?.sellingPrice)/cartlist?.product?.manufracture)*100) | number : '1.0-0'}}% OFF
       </span></div>
     </div>
+
+    <!-- <div class="buy-get-tag">
+      <div>
+        <img src="../../assets/img/buy-get-tag.png" alt="tag" />
+      </div>
+    </div> -->
     <!-- <div class="special-offer-badge" *ngIf="cartlist?.product?.offers?.length == 1">
       <span>{{(((cartlist?.product?.manufracture - cartlist?.pricelist[0]?.sellingPrice)/cartlist?.product?.manufracture)*100)
         | number : '1.0-0'}}% OFF</span>

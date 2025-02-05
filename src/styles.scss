@@ -293,9 +293,11 @@ body {
         top: -5px;
         z-index: 1;
         overflow: hidden;
-        width: 75px; height: 75px;
+        width: 75px; 
+        height: 75px;
         text-align: right;
       }
+
 
       .ribbon span {
         font-size: 10px;
@@ -325,6 +327,7 @@ body {
         border-bottom: 3px solid transparent;
         border-top: 3px solid #00525b;
       }
+
       .ribbon span::after {
         content: "";
         position: absolute; right: 0px; top: 100%;

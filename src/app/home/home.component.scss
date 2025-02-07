@@ -237,6 +237,41 @@
             margin-bottom: 8px;
             padding-top: 2px;
         }
+
+        &.middle-banner {
+            .slick-slider {
+                .slick-slide {
+                    width: 100% !important;
+                    margin: 0;
+                    .banner-img {
+                        height: 200px;
+                        img {
+                            border-radius: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.bottom-banner {
+            .slick-list {
+                padding: 0 !important;
+            }
+            .slick-track {
+                width: 100% !important;
+            }
+            .slick-slider {
+                .slick-slide {
+                    margin: 0;
+                    .banner-img {
+                        height: 200px;
+                        img {
+                            border-radius: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 
  /* BANNER SLIDER WRAPPER */
@@ -878,4 +913,13 @@
     margin: 0;
     margin-left: 5px;
     text-decoration: line-through;
+}
+.buy-get-tag {
+    top: 0;
+    left: 10px;
+    z-index: 5;
+    position: absolute;
+    img {
+        width: 39px;
+    }
 }

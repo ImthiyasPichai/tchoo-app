@@ -135,9 +135,7 @@ export class EditProfileComponent {
   submitForm(event: any) {
     if (event.submitter.name == 'showSuccessBtn') {
       this.showSuccess();
-    } else if (event.submitter.name == 'sendOtpBtn') {
-      this.sendOtp();
-    }
+    } 
   }
   backNavigation(): void {
     this.history.pop();
@@ -155,6 +153,7 @@ export class EditProfileComponent {
     }
   }
   showSuccess() {
+    debugger
     this.app.pageLoader = true;
     this.submitted = true;
     this.details.value.userID = this.createdBy;

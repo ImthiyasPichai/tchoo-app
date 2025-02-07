@@ -28,12 +28,12 @@
                 </div>
                 </form>
             </div>
-            <div class="mb-1 text-right" [ngStyle]="isotpVerified ?{'display':'block'}:{'display':'none'}">Number Verified ! <img src="/assets/img/icons/verified.png"/></div>
-            <div class="form-group mb-1 text-right" [ngStyle]="isotpVerified ?{'display':'none'}:{'display':'block'}">
+            <!-- <div class="mb-1 text-right" [ngStyle]="isotpVerified ?{'display':'block'}:{'display':'none'}">Number Verified ! <img src="/assets/img/icons/verified.png"/></div> -->
+            <!-- <div class="form-group mb-1 text-right" [ngStyle]="isotpVerified ?{'display':'none'}:{'display':'block'}">
                 <button type="submit" class="btn btn-dark" name="sendOtpBtn">{{selectedlanguage =='Arabic (عربي)' ? 'التحقق من صحة رقم الاتصال':'Validate Number'}}</button>
-            </div>
+            </div> -->
             <div class="form-group edit-profile-bttn mb-4" >
-                <button type="submit"  class="btn btn-dark w-100" [ngClass]="{'disabled':!isotpVerified}" name="showSuccessBtn">{{selectedlanguage =='Arabic (عربي)' ? 'إرسال':'Submit'}}</button>
+                <button type="submit"  class="btn btn-dark w-100"  name="showSuccessBtn">{{selectedlanguage =='Arabic (عربي)' ? 'إرسال':'Submit'}}</button>
             </div>
         </form>
     </div>

@@ -26,6 +26,7 @@ export class HomeComponent {
 
   topBanner: BannerDTOs[] = [];
   bottomBanner: BannerDTOs[] = [];
+  middlewareBanner: BannerDTOs[] = [];
   userdetails: any = [];
   Hub: any = [];
   DefultAdd: any = [];
@@ -70,7 +71,7 @@ export class HomeComponent {
     infinite: true,
     centerMode: true,
     slidesToShow: 1,
-    dots: false,
+    dots: true,
     arrows: true,
     swipe: true,
     autoplay: true,
@@ -192,6 +193,7 @@ export class HomeComponent {
     this.ProductService.getTopBannerList(this.HubId).subscribe({
       next: (res: any) => {
         this.topBanner = res;
+        
       }, error: (err) => {
         this.app.commonLoader = false;
         this.app.pageLoader = false;
@@ -205,6 +207,20 @@ export class HomeComponent {
     this.ProductService.getBottomBannerList(this.HubId).subscribe({
       next: (res: any) => {
         this.bottomBanner = res;
+      }, error: (err) => {
+        this.app.commonLoader = false;
+        this.app.pageLoader = false;
+        // console.log(err);
+      }, complete: () => {
+        this.getMiddleBannerList();
+      },
+    });
+  }
+  getMiddleBannerList() {
+    this.ProductService.getMiddleBannerList(this.HubId).subscribe({
+      next: (res: any) => {
+        this.middlewareBanner = res;
+        console.log("this.middlewareBanner",this.middlewareBanner);
       }, error: (err) => {
         this.app.commonLoader = false;
         this.app.pageLoader = false;

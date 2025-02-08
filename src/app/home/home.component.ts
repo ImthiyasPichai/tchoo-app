@@ -66,6 +66,20 @@ export class HomeComponent {
     createdby: [''],
   };
 
+  //  /* MAIN BANNER */
+  //  mainBanner = {
+  //   infinite: true,
+  //   centerMode: true,
+  //   centerPadding: "50px", // Adjust padding for a better 3D effect
+  //   slidesToShow: 3, // Show 3 slides
+  //   dots: true,
+  //   arrows: true,
+  //   swipe: true,
+  //   autoplay: true,
+  //   autoplaySpeed: 2000,
+  //   swipeToSlide: true,
+  //   cssEase: "cubic-bezier(0.7, 0, 0.3, 1)", // Smooth effect
+  // };
   /* MAIN BANNER */
   mainBanner = {
     infinite: true,
@@ -79,6 +93,27 @@ export class HomeComponent {
     swipeToSlide: true,
   };
 
+  // BOTTOM BANNER
+  bottmBannerimages = [
+    { src: 'assets/img/home/bottom-banner/1.png' },
+    { src: 'assets/img/home/bottom-banner/2.png' },
+    { src: 'assets/img/home/bottom-banner/3.png' },
+    { src: 'assets/img/home/bottom-banner/4.png' },
+  ];
+
+  bottomBannerSlider = {
+    infinite: true,
+    centerMode: true,
+    centerPadding: '50px',
+    slidesToShow: 3,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    dots: false,
+    arrows: true,
+    prevArrow: '<button class="custom-prev"><i class="fa-solid fa-chevron-left"></i></button>',
+    nextArrow: '<button class="custom-next"><i class="fa-solid fa-chevron-right"></i></button>',
+  }
+
   // CATEGORY SLIDER
   categorySlider = {
     infinite: true,
@@ -87,10 +122,15 @@ export class HomeComponent {
     dots: false,
     arrows: true,
     swipe: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 2000,
     swipeToSlide: true,
   };
+
+  onImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    target.src = 'assets/img/category/no-image.png'; // Fallback image
+  }
 
   /* CONSTRUCTOR */
   constructor(
@@ -123,7 +163,7 @@ export class HomeComponent {
     }
     window.addEventListener('scroll', this.onScroll.bind(this));
   }
-  
+
   onScroll(): void {
     const videoElement = document.querySelector('video'); // Adjust selector to target your video element
     if (videoElement && this.isInViewport(videoElement as HTMLElement)) {
@@ -149,7 +189,7 @@ export class HomeComponent {
       });
     }
   }
- 
+
   /* GET address list of user */
   getAddress() {
     this.local.getAddress(this.createdBy).subscribe({
@@ -168,6 +208,7 @@ export class HomeComponent {
       },
     });
   }
+
   /* GET HUB ID */
   getHub() {
     this.local.getHub(this.defaultzip).subscribe({
@@ -187,13 +228,14 @@ export class HomeComponent {
       }
     });
   }
+
   /* GET BANNER LIST */
   getTopBannerList() {
     this.app.commonLoader = true;
     this.ProductService.getTopBannerList(this.HubId).subscribe({
       next: (res: any) => {
         this.topBanner = res;
-        
+
       }, error: (err) => {
         this.app.commonLoader = false;
         this.app.pageLoader = false;
@@ -203,6 +245,7 @@ export class HomeComponent {
       },
     });
   }
+
   getBottomBannerList() {
     this.ProductService.getBottomBannerList(this.HubId).subscribe({
       next: (res: any) => {
@@ -212,15 +255,16 @@ export class HomeComponent {
         this.app.pageLoader = false;
         // console.log(err);
       }, complete: () => {
-        this.getMiddleBannerList();
+        this.getMMiddleBannerList();
       },
     });
   }
-  getMiddleBannerList() {
+
+  getMMiddleBannerList() {
     this.ProductService.getMiddleBannerList(this.HubId).subscribe({
       next: (res: any) => {
         this.middlewareBanner = res;
-        console.log("this.middlewareBanner",this.middlewareBanner);
+        console.log("this.middlewareBanner", this.middlewareBanner);
       }, error: (err) => {
         this.app.commonLoader = false;
         this.app.pageLoader = false;
@@ -230,6 +274,7 @@ export class HomeComponent {
       },
     });
   }
+
   getMainCategory() {
     this.service.getmaincategory('All', this.createdBy).subscribe({
       next: (response) => {
@@ -243,6 +288,7 @@ export class HomeComponent {
       },
     });
   }
+
   /* GET top 5 RECENTLY viewed ITEMS */
   getRecenltyviewItems() {
     this.ProductService.getRecenltyviewItems(this.createdBy, 'Top_5').subscribe({
@@ -257,6 +303,7 @@ export class HomeComponent {
       },
     });
   }
+
   /* GET ALL PRODUCT */
   GetAllProducts() {
     this.local.getCartItems(this.createdBy).subscribe({
@@ -272,6 +319,7 @@ export class HomeComponent {
       },
     });
   }
+
   /* FEATURES list top 5 */
   getfeature() {
     this.ProductService.getFeaturedProducts('Top_5', this.createdBy).subscribe({
@@ -295,6 +343,7 @@ export class HomeComponent {
   getAllCategory(id: any) {
     window.location.href = 'Main-Category/SubCategory/ProductList/' + id + '/' + this.createdBy + '/' + this.HubId + '/asc/0/0';
   }
+
   /* PRODDUCT DETAILS */
   proddetails(itemId: any) {
     this.ProductService.getProductDetail(itemId, this.createdBy).subscribe({
@@ -309,6 +358,7 @@ export class HomeComponent {
     });
     // }
   }
+
   /* PRODUCT SERACH FUNCTION */
   search() {
     this.searchvalue = this.searchValue;
@@ -316,6 +366,7 @@ export class HomeComponent {
       this.router.navigate(['/search-list/' + this.createdBy + '/' + encodeURI(this.searchvalue) + '/' + this.HubId]);
     }
   }
+
   /* ADDED WISH LIST */
   addedWishlist(item: any) {
     if (this.createdBy == 0) {
@@ -339,6 +390,7 @@ export class HomeComponent {
       });
     }
   }
+
   /* REMOVE WISH LIST */
   removeWishlist(id: any) {
     this.app.pageLoader = true;
@@ -356,6 +408,7 @@ export class HomeComponent {
       },
     });
   }
+
   isInViewport(element: HTMLElement): boolean {
     const rect = element.getBoundingClientRect();
     return (
@@ -365,7 +418,7 @@ export class HomeComponent {
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
   }
-  
+
   handleAutoPlay(videoElement: HTMLVideoElement): void {
     if (this.isInViewport(videoElement)) {
       videoElement.muted = false; // Unmute the video
@@ -380,7 +433,6 @@ export class HomeComponent {
       console.log('Video is not in the viewport yet.');
     }
   }
-  
 
   /* PRODUCT DETAILS PAGE  */
   producdetailspage(itemId: any) {
@@ -421,6 +473,7 @@ export class HomeComponent {
         ;
     }
   }
+
   // add to cart
   addToCart(val: { id: any; itemId: any; priceId: any; quantity: any; customerId: any; addedby: any; sellingPrice: any; pluName: any; imagePath: any; }) {
     if (this.createdBy == 0) {
@@ -453,6 +506,7 @@ export class HomeComponent {
       });
     }
   }
+
   /* CONTINUE PRODUCT */
   continueProduct() {
     this.Proddetails = { itemId: this.itemid, quantity: 1, price: this.selectedPrice, varient: this.selectedSize, createdby: this.createdBy, sellingPrice: this.selectedPrice };
@@ -482,6 +536,7 @@ export class HomeComponent {
       },
     });
   }
+
   /* VARIANT CHANGES */
   varientChange(price: any, size: any, index: any, itemId: any, stockQty: any) {
     this.app.pageLoader = true;
@@ -492,11 +547,13 @@ export class HomeComponent {
     this.isProductOutOfStock = (stockQty === 0) ? true : false;
     this.app.pageLoader = false;
   }
+
   /* CLOSE VARIANT */
   closeVariant() {
     this.variantView = false;
     this.modalPatch = false;
   }
+
   // update price as per quantity
   UpdateQuantPrice(id: any, data: any) {
     data.createdby = this.createdBy;
@@ -512,6 +569,7 @@ export class HomeComponent {
       },
     });
   }
+
   onInputUpdateqty(product: any, enteredQty: any) {
     this.str = enteredQty.value;
     if (this.str <= product.stockQty) {
@@ -535,6 +593,7 @@ export class HomeComponent {
       this.app.openSnackBar(`Order Limits Exceed`);
     }
   }
+
   /* HANDLE plus counter */
   handlePlus(product: any) {
     this.str = product.quantity;
@@ -549,6 +608,7 @@ export class HomeComponent {
       this.app.openSnackBar('Order Limit Exceed');
     }
   }
+
   /* HANDLE MINUS */
   handleMinus(product: any) {
     this.str = product.quantity
@@ -564,6 +624,7 @@ export class HomeComponent {
     }
     this.UpdateQuantPrice(product.id, product);
   }
+
   //remove product from cart
   RemoveProdFromCart(data: any) {
     if (data.id != null) {

@@ -1,6 +1,8 @@
 <section
   class="home-screen {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}"
   [ngClass]="{'modal-patch': modalPatch }">
+
+  <!-- USER TITLE -->
   <div class="user-title">
     <div class="d-flex align-items-center justify-content-between">
       <div class="title">
@@ -33,6 +35,8 @@
     </a> -->
     </div>
   </div>
+
+  <!-- BANNER SLIDER WRAPPER -->
   <div class="banner-slider-wrapper">
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel"
       [config]="mainBanner">
@@ -132,6 +136,7 @@
     </div>
 
   </div>
+
   <!-- PAGE COMMON WRAPPER  -->
   <div class="page-common-wrapper mb-4 mt-3" *ngIf="feature?.length >0">
     <div class="page-common-header pt-0 pb-0">
@@ -156,15 +161,13 @@
               * 100) | number: '1.0-0' }}% OFF
             </span>
           </div>
-       
-       
-          
+
           <div class="buy-get-tag" *ngIf="feat.offers?.[0]?.offerTypes === '6'">
             <div>
               <img src="../../assets/img/buy-get-tag.png" alt="tag" />
             </div>
           </div>
-      
+
         </div>
         <div class="top-img">
           <div class="card-img">
@@ -231,12 +234,12 @@
       </div>
     </div>
   </div>
- 
+
   <!-- PAGE COMMON WRAPPER -->
   <app-recentlyviewed></app-recentlyviewed>
   <div class="banner-slider-wrapper middle-banner">
-   
-    <div  class="slide" *ngFor="let baner of middlewareBanner">
+
+    <div class="slide" *ngFor="let baner of middlewareBanner">
       <div *ngIf="baner.banner_TriggerId.substring(0,3)!='MNC'">
         <div class="banner-img">
           <a (click)="proddetails(baner.banner_TriggerId)">
@@ -258,12 +261,13 @@
         </div>
       </div>
     </div>
- 
-</div>
-  <div class="banner-slider-wrapper bottom-banner">
+  </div>
+
+  <!-- BOTTOM BANNER -->
+  <div class="bottom-banner-slider">
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel"
-      [config]="mainBanner">
-      <div ngxSlickItem class="slide" *ngFor="let baner of bottomBanner">
+      [config]="bottomBannerSlider">
+      <!-- <div ngxSlickItem class="slide" *ngFor="let baner of bottomBanner">
         <div *ngIf="baner.banner_TriggerId.substring(0,3)!='MNC'">
           <div class="banner-img">
             <a (click)="proddetails(baner.banner_TriggerId)">
@@ -284,12 +288,55 @@
             </a>
           </div>
         </div>
+      </div> -->
+      <div ngxSlickItem class="slide" *ngFor="let image of bottmBannerimages">
+        <div class="image-wrapper">
+          <img [src]="image.src" alt="Banner Image" />
+        </div>
       </div>
     </ngx-slick-carousel>
   </div>
 
+  <!-- GALLERY BANNER -->
+  <!-- <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="categorySlider">
+    <div ngxSlickItem class="slide" *ngFor="let baner of bottomBanner">
+       <div *ngIf="baner.banner_TriggerId.substring(0,3)!='MNC'">
+         <div class="banner-img">
+           <a (click)="proddetails(baner.banner_TriggerId)">
+             <img
+               src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/{{baner.bannerId}}.png"
+               alt="baner" width="100%" />
+           </a>
+         </div>
+       </div>
+       <div *ngIf="baner.banner_TriggerId.substring(0,3)=='MNC'">
+         <div class="banner-img">
+           <a
+             href="/Main-Category/SubCategory/ProductList/{{baner.banner_TriggerId}}/{{createdBy}}/{{HubId}}/asc/0/0">
+             <img
+               src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/{{baner.bannerId}}.png"
+               onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
+               alt="baner" width="100%" />
+           </a>
+         </div>
+       </div>
+     </div>
+     </ngx-slick-carousel> -->
+  <div class="gallery-banner">
+    <div class="gallery-left">
+      <div class="left-top">
+        <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/BNNR07.png" alt="banner" />
+      </div>
+      <div class="left-bottom">
+        <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/BNNR04.png" alt="banner" />
+      </div>
+    </div>
+    <div class="gallery-right">
+      <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/BNNR05.png" alt="banner" />
+    </div>
+  </div>
 
-  
+  <!-- SELECT VARIANT -->
   <div class="select-variant" [ngClass]="{ 'product-variant': variantView }">
     <div class="variant-header">
       <h2>{{selectedlanguage =='Arabic (عربي)' ?'اختر واحدة':'Choose One'}}</h2>

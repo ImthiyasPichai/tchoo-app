@@ -133,6 +133,7 @@ export class RecentViewComponent implements OnInit {
         // console.log(err);
       }, complete: () => {
         this.getCartItems();
+        console.log("recently",this.getViewedProducts)
       }
     });
   }

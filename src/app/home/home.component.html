@@ -150,17 +150,22 @@
       <div class="common-card-box" *ngFor="let feat of feature">
 
         <div class="ribbon-box-wrapper" *ngIf="feat.offers?.length === 1">
-          <div class="ribbon" *ngIf="feat.offers?.offerTypes === 1">
+          <div class="ribbon" *ngIf="feat.offers?.[0]?.offerTypes === '1'">
             <span>
               {{ (((feat.manufracture - feat.sellingPrice) / feat.manufracture)
               * 100) | number: '1.0-0' }}% OFF
             </span>
           </div>
+       
+       
+          
+          <div class="buy-get-tag" *ngIf="feat.offers?.[0]?.offerTypes === '6'">
+            <div>
+              <img src="../../assets/img/buy-get-tag.png" alt="tag" />
+            </div>
+          </div>
+      
         </div>
-
-        <!-- <div class="special-offer-badge" *ngIf="feat.offers?.length == 1">
-          <span>{{(((feat.manufracture-feat.sellingPrice)/feat.manufracture)*100) | number : '1.0-0'}}% OFF</span>
-        </div> -->
         <div class="top-img">
           <div class="card-img">
             <a
@@ -226,10 +231,62 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- PAGE COMMON WRAPPER -->
   <app-recentlyviewed></app-recentlyviewed>
-
+  <div class="banner-slider-wrapper middle-banner">
+   
+    <div  class="slide" *ngFor="let baner of middlewareBanner">
+      <div *ngIf="baner.banner_TriggerId.substring(0,3)!='MNC'">
+        <div class="banner-img">
+          <a (click)="proddetails(baner.banner_TriggerId)">
+            <img
+              src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/{{baner.bannerId}}.png"
+              alt="baner" width="100%" />
+          </a>
+        </div>
+      </div>
+      <div *ngIf="baner.banner_TriggerId.substring(0,3)=='MNC'">
+        <div class="banner-img">
+          <a
+            href="/Main-Category/SubCategory/ProductList/{{baner.banner_TriggerId}}/{{createdBy}}/{{HubId}}/asc/0/0">
+            <img
+              src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/{{baner.bannerId}}.png"
+              onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
+              alt="baner" width="100%" />
+          </a>
+        </div>
+      </div>
+    </div>
+ 
+</div>
+  <div class="banner-slider-wrapper bottom-banner">
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel"
+      [config]="mainBanner">
+      <div ngxSlickItem class="slide" *ngFor="let baner of bottomBanner">
+        <div *ngIf="baner.banner_TriggerId.substring(0,3)!='MNC'">
+          <div class="banner-img">
+            <a (click)="proddetails(baner.banner_TriggerId)">
+              <img
+                src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/{{baner.bannerId}}.png"
+                alt="baner" width="100%" />
+            </a>
+          </div>
+        </div>
+        <div *ngIf="baner.banner_TriggerId.substring(0,3)=='MNC'">
+          <div class="banner-img">
+            <a
+              href="/Main-Category/SubCategory/ProductList/{{baner.banner_TriggerId}}/{{createdBy}}/{{HubId}}/asc/0/0">
+              <img
+                src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/{{baner.bannerId}}.png"
+                onerror="this.onerror=null; this.src='assets/img/category/no-image.png'"
+                alt="baner" width="100%" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </ngx-slick-carousel>
+  </div>
   <div class="select-variant" [ngClass]="{ 'product-variant': variantView }">
     <div class="variant-header">
       <h2>{{selectedlanguage =='Arabic (عربي)' ?'اختر واحدة':'Choose One'}}</h2>

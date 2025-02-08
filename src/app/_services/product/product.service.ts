@@ -59,6 +59,9 @@ export class ProductService {
   }
   // get bottom banner details
   getBottomBannerList(hubId:any) {
+    return this.http.get(this.enviroment.ProductBaseUrl  + 'GetBannerLists/'+hubId+'/B');
+  }
+  getMiddleBannerList(hubId:any) {
     return this.http.get(this.enviroment.ProductBaseUrl  + 'GetBannerLists/'+hubId+'/BMC');
   }
   // add to cart api
@@ -87,6 +90,7 @@ export class ProductService {
   }
   // update profile
   editProfile(userdata:any,contactdata:any){
+    debugger
     const formdata={
       "userId": userdata.userID,
       "fullName": userdata.fullName,

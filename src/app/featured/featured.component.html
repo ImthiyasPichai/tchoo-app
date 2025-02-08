@@ -37,7 +37,7 @@
             <div class="ribbon-box-wrapper" *ngIf="item.offers?.length == 1">
               <div class="ribbon"><span>{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</span></div>
             </div>
-            <!-- <div class="special-offer-badge" *ngIf="item.offers?.length == 1"><span>{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</span></div> -->
+            <div class="special-offer-badge" *ngIf="item.offers?.length == 1"><span>{{(((item.manufracture-item.sellingPrice)/item.manufracture)*100) | number : '1.0-0'}}% OFF</span></div>
             <!-- AB0069 start -->
             <a class="added-wish-list {{item.isWishlisted}}" href="javascript:void(0)">
               <i *ngIf='item.isWishlisted == "false"' class='fa-regular fa-heart' style='font-size:20px'

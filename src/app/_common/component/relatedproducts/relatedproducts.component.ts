@@ -199,6 +199,7 @@ export class RelatedproductsComponent implements OnInit {
       }, complete: () => {
         this.app.commonLoader = false;
         this.app.pageLoader = false;
+        
       }
     });
   }
@@ -213,6 +214,7 @@ export class RelatedproductsComponent implements OnInit {
       }, complete: () => {
         this.app.commonLoader = false;
         this.app.pageLoader = false;
+        console.log("getItems",this.getItems);
       },
     });
   }

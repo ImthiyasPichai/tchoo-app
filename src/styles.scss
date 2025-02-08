@@ -627,10 +627,15 @@ body {
       display: flex;
       height: 250px;
       gap: 4px;
+
+      .gallery-left{
+        margin-right: 2px;
+      }
       .gallery-left,
       .gallery-right {
         width: 50%;
         height: 100%;
+        
         img {
           width: 100%;
           height: 100%;
@@ -639,7 +644,7 @@ body {
         &.gallery-left {
           .left-top {
             height: 50%;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
           }
   
           .left-bottom {

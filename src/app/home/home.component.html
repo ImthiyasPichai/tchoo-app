@@ -1,6 +1,5 @@
 <section
-  class="home-screen {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}"
-  [ngClass]="{'modal-patch': modalPatch }">
+  class="home-screen {{selectedlanguage =='Arabic (عربي)' ? 'left-to-right':''}}" [ngClass]="{'modal-patch': modalPatch }">
   <div class="user-title">
     <div class="d-flex align-items-center justify-content-between">
       <div class="title">
@@ -33,6 +32,7 @@
     </a> -->
     </div>
   </div>
+  
   <div class="banner-slider-wrapper">
     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel"
       [config]="mainBanner">

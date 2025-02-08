@@ -66,18 +66,32 @@ export class HomeComponent {
     createdby: [''],
   };
 
-  /* MAIN BANNER */
-  mainBanner = {
-    infinite: true,
-    centerMode: true,
-    slidesToShow: 1,
-    dots: true,
-    arrows: true,
-    swipe: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    swipeToSlide: true,
-  };
+//  /* MAIN BANNER */
+//  mainBanner = {
+//   infinite: true,
+//   centerMode: true,
+//   centerPadding: "50px", // Adjust padding for a better 3D effect
+//   slidesToShow: 3, // Show 3 slides
+//   dots: true,
+//   arrows: true,
+//   swipe: true,
+//   autoplay: true,
+//   autoplaySpeed: 2000,
+//   swipeToSlide: true,
+//   cssEase: "cubic-bezier(0.7, 0, 0.3, 1)", // Smooth effect
+// };
+ /* MAIN BANNER */
+ mainBanner = {
+  infinite: true,
+  centerMode: true,
+  slidesToShow: 1,
+  dots: true,
+  arrows: true,
+  swipe: true,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  swipeToSlide: true,
+};
 
   // CATEGORY SLIDER
   categorySlider = {
@@ -168,6 +182,7 @@ export class HomeComponent {
       },
     });
   }
+
   /* GET HUB ID */
   getHub() {
     this.local.getHub(this.defaultzip).subscribe({
@@ -187,6 +202,7 @@ export class HomeComponent {
       }
     });
   }
+
   /* GET BANNER LIST */
   getTopBannerList() {
     this.app.commonLoader = true;
@@ -203,6 +219,7 @@ export class HomeComponent {
       },
     });
   }
+
   getBottomBannerList() {
     this.ProductService.getBottomBannerList(this.HubId).subscribe({
       next: (res: any) => {
@@ -212,11 +229,12 @@ export class HomeComponent {
         this.app.pageLoader = false;
         // console.log(err);
       }, complete: () => {
-        this.getMiddleBannerList();
+        this.getMMiddleBannerList();
       },
     });
   }
-  getMiddleBannerList() {
+
+  getMMiddleBannerList() {
     this.ProductService.getMiddleBannerList(this.HubId).subscribe({
       next: (res: any) => {
         this.middlewareBanner = res;
@@ -230,6 +248,7 @@ export class HomeComponent {
       },
     });
   }
+
   getMainCategory() {
     this.service.getmaincategory('All', this.createdBy).subscribe({
       next: (response) => {
@@ -243,6 +262,7 @@ export class HomeComponent {
       },
     });
   }
+
   /* GET top 5 RECENTLY viewed ITEMS */
   getRecenltyviewItems() {
     this.ProductService.getRecenltyviewItems(this.createdBy, 'Top_5').subscribe({
@@ -257,6 +277,7 @@ export class HomeComponent {
       },
     });
   }
+
   /* GET ALL PRODUCT */
   GetAllProducts() {
     this.local.getCartItems(this.createdBy).subscribe({
@@ -272,6 +293,7 @@ export class HomeComponent {
       },
     });
   }
+
   /* FEATURES list top 5 */
   getfeature() {
     this.ProductService.getFeaturedProducts('Top_5', this.createdBy).subscribe({
@@ -295,6 +317,7 @@ export class HomeComponent {
   getAllCategory(id: any) {
     window.location.href = 'Main-Category/SubCategory/ProductList/' + id + '/' + this.createdBy + '/' + this.HubId + '/asc/0/0';
   }
+
   /* PRODDUCT DETAILS */
   proddetails(itemId: any) {
     this.ProductService.getProductDetail(itemId, this.createdBy).subscribe({
@@ -309,6 +332,7 @@ export class HomeComponent {
     });
     // }
   }
+
   /* PRODUCT SERACH FUNCTION */
   search() {
     this.searchvalue = this.searchValue;
@@ -316,6 +340,7 @@ export class HomeComponent {
       this.router.navigate(['/search-list/' + this.createdBy + '/' + encodeURI(this.searchvalue) + '/' + this.HubId]);
     }
   }
+
   /* ADDED WISH LIST */
   addedWishlist(item: any) {
     if (this.createdBy == 0) {
@@ -339,6 +364,7 @@ export class HomeComponent {
       });
     }
   }
+  
   /* REMOVE WISH LIST */
   removeWishlist(id: any) {
     this.app.pageLoader = true;
@@ -356,6 +382,7 @@ export class HomeComponent {
       },
     });
   }
+
   isInViewport(element: HTMLElement): boolean {
     const rect = element.getBoundingClientRect();
     return (
@@ -380,7 +407,6 @@ export class HomeComponent {
       console.log('Video is not in the viewport yet.');
     }
   }
-  
 
   /* PRODUCT DETAILS PAGE  */
   producdetailspage(itemId: any) {
@@ -421,6 +447,7 @@ export class HomeComponent {
         ;
     }
   }
+
   // add to cart
   addToCart(val: { id: any; itemId: any; priceId: any; quantity: any; customerId: any; addedby: any; sellingPrice: any; pluName: any; imagePath: any; }) {
     if (this.createdBy == 0) {
@@ -453,6 +480,7 @@ export class HomeComponent {
       });
     }
   }
+
   /* CONTINUE PRODUCT */
   continueProduct() {
     this.Proddetails = { itemId: this.itemid, quantity: 1, price: this.selectedPrice, varient: this.selectedSize, createdby: this.createdBy, sellingPrice: this.selectedPrice };
@@ -482,6 +510,7 @@ export class HomeComponent {
       },
     });
   }
+
   /* VARIANT CHANGES */
   varientChange(price: any, size: any, index: any, itemId: any, stockQty: any) {
     this.app.pageLoader = true;
@@ -492,11 +521,13 @@ export class HomeComponent {
     this.isProductOutOfStock = (stockQty === 0) ? true : false;
     this.app.pageLoader = false;
   }
+
   /* CLOSE VARIANT */
   closeVariant() {
     this.variantView = false;
     this.modalPatch = false;
   }
+
   // update price as per quantity
   UpdateQuantPrice(id: any, data: any) {
     data.createdby = this.createdBy;
@@ -512,6 +543,7 @@ export class HomeComponent {
       },
     });
   }
+
   onInputUpdateqty(product: any, enteredQty: any) {
     this.str = enteredQty.value;
     if (this.str <= product.stockQty) {
@@ -535,6 +567,7 @@ export class HomeComponent {
       this.app.openSnackBar(`Order Limits Exceed`);
     }
   }
+
   /* HANDLE plus counter */
   handlePlus(product: any) {
     this.str = product.quantity;
@@ -549,6 +582,7 @@ export class HomeComponent {
       this.app.openSnackBar('Order Limit Exceed');
     }
   }
+
   /* HANDLE MINUS */
   handleMinus(product: any) {
     this.str = product.quantity
@@ -564,6 +598,7 @@ export class HomeComponent {
     }
     this.UpdateQuantPrice(product.id, product);
   }
+
   //remove product from cart
   RemoveProdFromCart(data: any) {
     if (data.id != null) {

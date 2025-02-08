@@ -320,7 +320,7 @@
         }
 
         span {
-            color: #00525b;
+            color: #ffffff;
             font-weight: 500;
             font-size: 14px;
             vertical-align: middle;
@@ -1010,4 +1010,12 @@
     img {
         width: 39px;
     }
+}
+.offer-amount {
+    color: #DF3737;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0;
+    margin-left: 5px;
+    text-decoration: line-through;
 }

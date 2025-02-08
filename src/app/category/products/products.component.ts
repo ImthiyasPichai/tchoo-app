@@ -275,10 +275,9 @@ displayImagArray:any=[]
     this.product_service.getProductDetail(this.itemid, this.createdBy).subscribe({
       next: (data) => {
         this.cartlist = data;
-        console.log(data);
+        console.log("cartlist",this.cartlist);
         this.product = this.cartlist.product;
         this.pdfPreview=this.product.iFrame;
-        console.log(this.product);
         this.proddescleng = this.product.description?.length;
         this.isProductOutOfStock = (this.cartlist?.pricelist[0]?.stockQty === 0) ? true : false;
         this.selectedStockQty = this.cartlist?.pricelist[0]?.stockQty;
@@ -320,7 +319,7 @@ displayImagArray:any=[]
         this.app.commonLoader = false;
       },
     });
-    console.log("cartlist",this.cartlist);
+ 
   }
   
   getImagesToDisplay(priceId:any) {

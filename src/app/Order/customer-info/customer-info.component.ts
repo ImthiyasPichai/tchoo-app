@@ -332,6 +332,8 @@ export class CustomerInfoComponent implements OnInit {
   placeOrder(paymentMethod: string, transactionId: string) {
     this.isOrderPlacedOverlayVisible = true;
   
+    const paymentStatus = paymentMethod === "Online" ? "PAID" : "PENDING";
+  
     const mydata = {
       userId: this.createdby,
       cartId: this.cartId,
@@ -339,9 +341,9 @@ export class CustomerInfoComponent implements OnInit {
       addId: this.selectedAdd ? this.selectedAdd : this.defaultadd.addId,
       hubId: this.HubId,
       deliveryCharge: this.deliveryCharge.toString(),
-      paymentResponse: transactionId,  // Store transaction ID
+      paymentResponse: transactionId, // Store transaction ID
       paymentMethod: paymentMethod,
-      paymentStatus: "PENDING",  // Mark as completed only if payment is done
+      paymentStatus: paymentStatus, // Set PAID for Online, PENDING for COD
       orderId: "-",
       transactionId: transactionId
     };
@@ -352,7 +354,6 @@ export class CustomerInfoComponent implements OnInit {
   
         setTimeout(() => {
           this.isOrderPlacedOverlayVisible = false;
-          //this.app.openSnackBar(`Order placed successfully with ${paymentMethod}!`);
           window.location.href = `Home/${this.createdby}`;
         }, 1000);
       },
@@ -365,6 +366,7 @@ export class CustomerInfoComponent implements OnInit {
       }
     });
   }
+  
   
 
   showSelectAddressMd() {

@@ -66,32 +66,53 @@ export class HomeComponent {
     createdby: [''],
   };
 
-//  /* MAIN BANNER */
-//  mainBanner = {
-//   infinite: true,
-//   centerMode: true,
-//   centerPadding: "50px", // Adjust padding for a better 3D effect
-//   slidesToShow: 3, // Show 3 slides
-//   dots: true,
-//   arrows: true,
-//   swipe: true,
-//   autoplay: true,
-//   autoplaySpeed: 2000,
-//   swipeToSlide: true,
-//   cssEase: "cubic-bezier(0.7, 0, 0.3, 1)", // Smooth effect
-// };
- /* MAIN BANNER */
- mainBanner = {
-  infinite: true,
-  centerMode: true,
-  slidesToShow: 1,
-  dots: true,
-  arrows: true,
-  swipe: true,
-  autoplay: true,
-  autoplaySpeed: 2000,
-  swipeToSlide: true,
-};
+  //  /* MAIN BANNER */
+  //  mainBanner = {
+  //   infinite: true,
+  //   centerMode: true,
+  //   centerPadding: "50px", // Adjust padding for a better 3D effect
+  //   slidesToShow: 3, // Show 3 slides
+  //   dots: true,
+  //   arrows: true,
+  //   swipe: true,
+  //   autoplay: true,
+  //   autoplaySpeed: 2000,
+  //   swipeToSlide: true,
+  //   cssEase: "cubic-bezier(0.7, 0, 0.3, 1)", // Smooth effect
+  // };
+  /* MAIN BANNER */
+  mainBanner = {
+    infinite: true,
+    centerMode: true,
+    slidesToShow: 1,
+    dots: true,
+    arrows: true,
+    swipe: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    swipeToSlide: true,
+  };
+
+  // BOTTOM BANNER
+  bottmBannerimages = [
+    { src: 'assets/img/home/bottom-banner/1.png' },
+    { src: 'assets/img/home/bottom-banner/2.png' },
+    { src: 'assets/img/home/bottom-banner/3.png' },
+    { src: 'assets/img/home/bottom-banner/4.png' },
+  ];
+
+  bottomBannerSlider = {
+    infinite: true,
+    centerMode: true,
+    centerPadding: '50px',
+    slidesToShow: 3,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    dots: false,
+    arrows: true,
+    prevArrow: '<button class="custom-prev"><i class="fa-solid fa-chevron-left"></i></button>',
+    nextArrow: '<button class="custom-next"><i class="fa-solid fa-chevron-right"></i></button>',
+  }
 
   // CATEGORY SLIDER
   categorySlider = {
@@ -101,10 +122,15 @@ export class HomeComponent {
     dots: false,
     arrows: true,
     swipe: true,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 2000,
     swipeToSlide: true,
   };
+
+  onImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    target.src = 'assets/img/category/no-image.png'; // Fallback image
+  }
 
   /* CONSTRUCTOR */
   constructor(
@@ -137,7 +163,7 @@ export class HomeComponent {
     }
     window.addEventListener('scroll', this.onScroll.bind(this));
   }
-  
+
   onScroll(): void {
     const videoElement = document.querySelector('video'); // Adjust selector to target your video element
     if (videoElement && this.isInViewport(videoElement as HTMLElement)) {
@@ -163,7 +189,7 @@ export class HomeComponent {
       });
     }
   }
- 
+
   /* GET address list of user */
   getAddress() {
     this.local.getAddress(this.createdBy).subscribe({
@@ -209,7 +235,7 @@ export class HomeComponent {
     this.ProductService.getTopBannerList(this.HubId).subscribe({
       next: (res: any) => {
         this.topBanner = res;
-        
+
       }, error: (err) => {
         this.app.commonLoader = false;
         this.app.pageLoader = false;
@@ -238,7 +264,7 @@ export class HomeComponent {
     this.ProductService.getMiddleBannerList(this.HubId).subscribe({
       next: (res: any) => {
         this.middlewareBanner = res;
-        console.log("this.middlewareBanner",this.middlewareBanner);
+        console.log("this.middlewareBanner", this.middlewareBanner);
       }, error: (err) => {
         this.app.commonLoader = false;
         this.app.pageLoader = false;
@@ -364,7 +390,7 @@ export class HomeComponent {
       });
     }
   }
-  
+
   /* REMOVE WISH LIST */
   removeWishlist(id: any) {
     this.app.pageLoader = true;
@@ -392,7 +418,7 @@ export class HomeComponent {
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
   }
-  
+
   handleAutoPlay(videoElement: HTMLVideoElement): void {
     if (this.isInViewport(videoElement)) {
       videoElement.muted = false; // Unmute the video

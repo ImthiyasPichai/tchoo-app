@@ -44,6 +44,8 @@ import { OffersComponent } from './offers/offers.component';
 import { BundleOfferComponent } from './offers/bundle-offer/bundle-offer.component';
 import { BagaOfferComponent } from './offers/baga-offer/baga-offer.component';
 import { BulkOfferComponent } from './offers/bulk-offer/bulk-offer.component';
+import { AIComponent } from './ai/ai.component';
+import { CustomisePageComponent } from './customise-page/customise-page.component';
 
 const routes: Routes = [
   { path: 'splash-screen', component: SplashScreenComponent },
@@ -51,6 +53,8 @@ const routes: Routes = [
 
   { path: 'EditAddress/:userId/:addId/:HubId', component: EditAddressComponent },
   { path: 'Home/:userId', component: HomeComponent },
+  { path: 'AI/:userId', component: AIComponent },
+  { path: 'CustomisePage/:id/:mncatId/:userId/:HubId/:orderby/:sortId/:catId', component: CustomisePageComponent },
   { path: 'Notifications/:userId/:HubId', component: NotificationsComponent },
   { path: 'Notifi-setting/:userId/:HubId', component: PushNotificationComponent },
   { path: 'Main-Category/:userId/:HubId', component: MainCategoryComponent },

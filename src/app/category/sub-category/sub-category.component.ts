@@ -108,6 +108,19 @@ export class SubCategoryComponent {
       },
     });
   }
+  placeholderText: string = "";
+  placeholders: string[] = [
+    "Search for Fish Feed",
+    "Search for Fish Accessories",
+    "Search for Fish Bowl",
+    "Search for Aquarium Plants",
+    "Search for Aquarium Filters",
+    "Search for Water Conditioners",
+    "Search for Aquarium Heaters"
+  ];
+  typingSpeed: number = 100; 
+  delayBetweenTexts: number = 1500; 
+  currentPlaceholderIndex: number = 0;
   ngOnInit() {
     this.navlink = JSON.parse(sessionStorage.getItem("navlinkParam") || '[]'); // Parse as an array or initialize with an empty array if null
     if (this.navlink[this.navlink.length - 1]?.url !== this.router.url || this.navlink[this.navlink.length - 1]?.url == undefined) {
@@ -115,6 +128,49 @@ export class SubCategoryComponent {
       sessionStorage.setItem("navlinkParam", JSON.stringify(this.navlink));
     }
     this.SortedProducts();
+    this.startTypingAnimation();
+
+  }
+  startTypingAnimation() {
+    this.typeText();
+  }
+
+  typeText() {
+    let index = 0;
+    let currentText = this.placeholders[this.currentPlaceholderIndex];
+    this.placeholderText = " "; // Keep "Search" static
+
+    const typingInterval = setInterval(() => {
+      if (index < currentText.length) {
+        this.placeholderText += currentText.charAt(index);
+        index++;
+      } else {
+        clearInterval(typingInterval);
+
+        // Wait before deleting
+        setTimeout(() => {
+          this.deleteText();
+        }, this.delayBetweenTexts);
+      }
+    }, this.typingSpeed);
+  }
+
+  deleteText() {
+    const deletingInterval = setInterval(() => {
+      if (this.placeholderText.length > 7) { // Keep "Search" and delete only dynamic part
+        this.placeholderText = this.placeholderText.slice(0, -1);
+      } else {
+        clearInterval(deletingInterval);
+
+        // Move to next placeholder text
+        this.currentPlaceholderIndex = (this.currentPlaceholderIndex + 1) % this.placeholders.length;
+
+        // Start typing next text
+        setTimeout(() => {
+          this.typeText();
+        }, 500);
+      }
+    }, 50);
   }
   SortedProducts() {
     this.catIds = this.selectedCatIds.length > 0 ? this.selectedCatIds : this.category.split(',');
@@ -287,7 +343,11 @@ export class SubCategoryComponent {
   }
   /* PRODUCT DETAILS PAGE */
   producdetailspage(itemId: any) {
-    if (this.catIds == '') {
+    debugger
+    if(this.maincatId =="MNCTG02019"){
+      window.location.href = '/CustomisePage/' + itemId + '/' + this.maincatId + '/' + this.createdBy + '/' + this.HubId + '/' + this.orderbyFinal + '/' + this.SortIdFinal + '/' + this.catIds;
+
+    }else if (this.catIds == '') {
       this.catIds = '0';
       window.location.href = '/Main-Category/SubCategory/Category/Products/' + itemId + '/' + this.maincatId + '/' + this.createdBy + '/' + this.HubId + '/' + this.orderbyFinal + '/' + this.SortIdFinal + '/' + this.catIds;
     } else {

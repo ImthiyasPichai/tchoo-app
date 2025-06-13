@@ -24,8 +24,8 @@
     <div class="common-search-box">
       <div class="common-search-input">
         <form (ngSubmit)="search()">
-          <img src="/assets/img/icons/search.png" class="search-icon" alt="search" />
-          <input type="text" placeholder="Search" name="searchValue" id="searchValue" [(ngModel)]="searchValue" />
+                    <span  class="search-icon" alt="search" ><i class="fa-solid fa-magnifying-glass"></i>        </span>
+          <input type="text"  [placeholder]="placeholderText"  name="searchValue" id="searchValue" [(ngModel)]="searchValue" />
         </form>
       </div>
     </div>
@@ -36,14 +36,13 @@
       <div>
       </div>
       <div class="category-view-status">
-        <a href="javascript:void(0)" (click)="productFilter()">
+        <!-- <a href="javascript:void(0)" (click)="productFilter()">
           <span>Filter</span>
           <img src="/assets/img/icons/filter.png" alt="filter" />
-        </a>
+        </a> -->
         <a href="javascript:void(0)" (click)="productSort()">
-          <span>Sort</span>
-          <img src="/assets/img/icons/sort.png" alt="sort" />
-        </a>
+          <span>Sort
+<i class="fa-solid fa-arrow-up-wide-short" style="padding-right:  12px;"></i>  </span>      </a>
       </div>
     </div>
     <ng-template #elseStatement>
@@ -230,7 +229,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Filter</h5>
-        <button type="button" class="btn btn-outline-dark" data-dismiss="modal" aria-label="Close"
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal" 
           (click)="closemd()">Reset
         </button>
       </div>
@@ -244,7 +243,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="SortProducts()">Apply</button>
+        <button type="button" class="btn" (click)="SortProducts()">Apply</button>
       </div>
     </div>
   </div>

@@ -37,9 +37,66 @@ export class CategoryComponent implements OnInit {
     private product_service: ProductService,
     private location: Location
   ) { }
+
+  placeholderText: string = "";
+  placeholders: string[] = [
+    "Search for Fish Feed",
+    "Search for Fish Accessories",
+    "Search for Fish Bowl",
+    "Search for Aquarium Plants",
+    "Search for Aquarium Filters",
+    "Search for Water Conditioners",
+    "Search for Aquarium Heaters"
+  ];
+  typingSpeed: number = 100; 
+  delayBetweenTexts: number = 1500; 
+  currentPlaceholderIndex: number = 0;
   ngOnInit(): void {
     this.getuserdetails();
+    this.startTypingAnimation();
   }
+  startTypingAnimation() {
+    this.typeText();
+  }
+
+  typeText() {
+    let index = 0;
+    let currentText = this.placeholders[this.currentPlaceholderIndex];
+    this.placeholderText = "Search "; // Keep "Search" static
+
+    const typingInterval = setInterval(() => {
+      if (index < currentText.length) {
+        this.placeholderText += currentText.charAt(index);
+        index++;
+      } else {
+        clearInterval(typingInterval);
+
+        // Wait before deleting
+        setTimeout(() => {
+          this.deleteText();
+        }, this.delayBetweenTexts);
+      }
+    }, this.typingSpeed);
+  }
+
+  deleteText() {
+    const deletingInterval = setInterval(() => {
+      if (this.placeholderText.length > 7) { // Keep "Search" and delete only dynamic part
+        this.placeholderText = this.placeholderText.slice(0, -1);
+      } else {
+        clearInterval(deletingInterval);
+
+        // Move to next placeholder text
+        this.currentPlaceholderIndex = (this.currentPlaceholderIndex + 1) % this.placeholders.length;
+
+        // Start typing next text
+        setTimeout(() => {
+          this.typeText();
+        }, 500);
+      }
+    }, 50);
+  }
+
   // redirecting to search component with value
   search() {
     this.searchvalue = this.searchValue;

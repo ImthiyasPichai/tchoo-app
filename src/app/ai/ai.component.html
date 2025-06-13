@@ -1,0 +1,74 @@
+<div class="ocean-background">
+  <div *ngIf="isAnimating" class="fish-animate">🐠</div>
+
+  <div class="chat-container">
+    <div class="chat-box" #chatBox>
+      <ng-container *ngIf="posts.length > 0; else emptyState">
+        <div *ngFor="let post of posts" class="message">
+          <div class="bubble user">
+            <strong>{{ post.name }}:</strong> {{ post.message }}
+          </div>
+
+          <div class="bubble ai">
+            {{ post.response }}
+
+            <!-- Product display block -->
+       <div *ngIf="post.product">
+  <div *ngIf="post.product.length > 0; else noProducts">
+    <p class="product-header">Here is a list of products:</p>
+    <div class="product-preview">
+         
+      <div *ngFor="let product of post.product" class="product-item">
+<div>
+    <a (click)="proddetails(product.itemId)">
+
+        <img
+          [src]="product.image"
+          alt="Product Image"
+          class="product-img"
+        />
+        <div><strong>{{ product.name }}</strong></div>
+        <div>Price: ₹{{ product.price }}</div>
+        </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noProducts>
+    <p class="no-products-message">No products available for this query.</p>
+  </ng-template>
+</div>
+
+
+
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #emptyState>
+        <div class="empty-state-container">
+          <img
+            src="../../assets/img/Image__1_-removebg-preview.png"
+            alt="Aquarium welcome"
+            class="empty-state-image"
+          />
+          <h2>Welcome to TCHOO Assistant!</h2>
+          <p>
+            Have questions about fish tanks, water cycles, or coral care? Just ask!
+            We’re here to help you keep your aquatic pets happy and healthy.
+          </p>
+          <p class="tip">
+            Tip: Try asking, "How do I cycle my aquarium?" or "Best fish for freshwater tanks?"
+          </p>
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="chat-input">
+      <input [(ngModel)]="input" placeholder="Ask about aquariums..." />
+      <button [disabled]="isAnimating" (click)="handleSend()">Send</button>
+    </div>
+
+    <div class="error" *ngIf="error">{{ error }}</div>
+  </div>
+</div>

@@ -198,7 +198,7 @@ export class ProductsComponent implements OnInit {
     } else {
       this.getProductDetail();
     }
-
+    this.loadReviewsFromSession();
   }
   getuserdetails() {
     this.app.commonLoader = true;
@@ -737,5 +737,78 @@ displayImagArray:any=[]
     }, 1500);
   }
 
+  selectedRating: number = 0;
+  customerFeedback: string = '';
+
+  productReviews = [
+    {
+      customerName: "Prachi",
+      rating: 4.5,
+      comment: "Great product!",
+      mediaType: "image",
+      mediaUrl: "https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/ITM01003_1.png"
+    },
+    {
+      customerName: "Imthiyas P",
+      rating: 4,
+      comment: "Good quality but a bit expensive.",
+      mediaType: "video",
+      mediaUrl: "https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/video/Purple%20and%20White%20Modern%20Geometric%20Animated%20Youtube%20Channel%20Intro%20Video.mp4"
+    },
+    {
+      customerName: "Jeeva Rakisth KS",
+      rating: 2,
+      comment: "Not satisfied with the quality.",
+      mediaType: "image",
+      mediaUrl: "https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/ITM01006_3.png"
+    }
+  ];
   
+
+  newReview = { customerName: "", rating: 0, comment: "" };
+
+
+
+   /** Function to Load Reviews from Session Storage */
+   loadReviewsFromSession() {
+    const storedReviews = sessionStorage.getItem('productReviews');
+    if (storedReviews) {
+      this.productReviews = JSON.parse(storedReviews);
+    }
+  }
+
+  /** Function to Save Reviews to Session Storage */
+  saveReviewsToSession() {
+    sessionStorage.setItem('productReviews', JSON.stringify(this.productReviews));
+  }
+
+  /** Function to Set Rating */
+  rateProduct(star: number) {
+    this.selectedRating = this.selectedRating === star ? star - 0.5 : star;
+    localStorage.setItem('productRating', this.selectedRating.toString());
+  }
+
+  /** Function to Get Star Class */
+  getStarClass(star: number) {
+    if (star <= this.selectedRating) {
+      return 'fa-solid fa-star text-warning';
+    } else if (star - 0.5 === this.selectedRating) {
+      return 'fa-solid fa-star-half-stroke text-warning';
+    } else {
+      return 'fa-regular fa-star text-muted';
+    }
+  }
+
+  /** Function to Select Rating for New Review */
+  selectRating(star: number) {
+    this.newReview.rating = star;
+  }
+
+ 
+
+  /** Get Total Reviews Count */
+  getTotalReviews() {
+    return this.productReviews.length;
+  }
 }
+

@@ -1,0 +1,93 @@
+
+<div class="custom-tank">
+
+
+
+  
+  <div class="tank-wrapper">
+    <img src="../../assets/img/tank.jpeg" alt="Fish Tank" class="tank-image" />
+
+    <!-- Dimension Lines -->
+ 
+    <div class="dimension-label height-label">{{ height }} cm</div>
+
+
+    <div class="dimension-label length-label"> {{ length }} cm</div>
+
+
+    <div class="dimension-label breadth-label">{{ breadth }} cm</div>
+  </div>
+<strong>Custom Size Tank According To Your Requirement</strong>
+  <p>Mention The Size in Centimeters</p>
+<hr>
+  <div class="dimension-inputs">
+    <label style="font-size: x-large;">L  <input type="number" [(ngModel)]="length" /></label>
+    <label style="font-size: x-large;">B  <input type="number" [(ngModel)]="breadth" /></label>
+    <label style="font-size: x-large;">H  <input type="number" [(ngModel)]="height" /></label>
+  </div>
+
+<div class="options-row">
+
+  <!-- Glass Thickness -->
+  <div class="glass-thickness custom-box" style="background: #004954;
+    padding: 6px;
+    border-radius: 4px;">
+    <label style="color: white;">Glass Thickness
+    <select [(ngModel)]="glassThickness">
+      <option *ngFor="let t of thicknessOptions">{{ t }}mm</option>
+    </select>
+    </label>
+  </div>
+
+  <!-- Get Price Button -->
+  
+  <div class="get-price-section custom-box">
+    <label class="get-price-btn" (click)="calculatePrice()">Get Price
+
+  <!-- Quantity Stepper -->
+
+ <button (click)="decreaseQty()">-</button>
+    <span>{{ quantity }}</span>
+    <button (click)="increaseQty()">+</button>
+
+    
+    </label>
+  </div>
+</div>
+
+
+
+
+</div>
+ <div class="bottom-bar">
+    <div class="price-display">
+      <div class="price">₹{{ totalPrice }}</div>
+      <div class="note">(Excluding Shipping)</div>
+    </div>
+    <div class="row buy-btn">
+      <div class="col-6 add-to-bag">
+        <label>Add to Bag</label>
+      </div>
+      <div class="col-6 buy-now">
+        <label>Buy Now</label>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Action Buttons -->
+
+  <div class="row buy-btn"  style="background: #004954;margin: auto;">
+    <div class="col-6" style="background-color: white;
+    text-align: center;
+    color: black;
+    border-radius: 3px;
+    font-size: 74%;">
+    <label style="background-color: white;text-align: center;">Add to Bag</label>
+    </div>
+    <div class="col-6"style="text-align: center;">
+  <label style="color: white;text-align: center;" class="">Buy Now</label>
+
+    </div>
+  </div>
+  

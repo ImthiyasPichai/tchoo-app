@@ -64,6 +64,12 @@ export class ProductService {
   getMiddleBannerList(hubId:any) {
     return this.http.get(this.enviroment.ProductBaseUrl  + 'GetBannerLists/'+hubId+'/BMC');
   }
+  GetCommunityBanner(hubId:any) {
+    return this.http.get(this.enviroment.ProductBaseUrl  + 'GetBannerLists/'+hubId+'/IMC');
+  }
+  GetPopBanner(hubId:any) {
+    return this.http.get(this.enviroment.ProductBaseUrl  + 'GetBannerLists/'+hubId+'/POPUP');
+  }
   // add to cart api
   addtoCart(userInfo: any): Observable<any> {
     const mydata={
@@ -90,7 +96,7 @@ export class ProductService {
   }
   // update profile
   editProfile(userdata:any,contactdata:any){
-    debugger
+    
     const formdata={
       "userId": userdata.userID,
       "fullName": userdata.fullName,

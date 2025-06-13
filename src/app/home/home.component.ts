@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../_services/category/category.service';
 import { MaincategoryService } from '../_services/maincategory/maincategory.service';
@@ -6,27 +5,218 @@ import { LocalService } from '../_services/local.service';
 import { ProductService } from '../_services/product/product.service';
 import { AppComponent } from 'src/app/app.component';
 import { BannerDTOs } from '../_common/DTOs/Home/BannerDTOs';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 
+
+declare var bootstrap: any;
 @Component({
-  selector: 'app-home',
+  //selector: 'app-home',
+  selector: 'app-video-section',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 
+
 export class HomeComponent {
+
+
+
+  HubId: any = 'HID01'; 
+
+
+
+
+
+  @ViewChild('heightModal') heightModal!: ElementRef;
+
+  PopBanner: any[] = [];
+  filteredBanners: any[] = [];
+  currentBanner: any;
+  currentIndex = 0;
+  modalInstance: any;
+
+  showTimer = false;
+timer = {
+  days: '00',
+  hours: '00',
+  minutes: '00',
+  seconds: '00'
+};
+
+  timerValue = '';
+  interval: any;
+ @ViewChild('videoElement', { static: true }) videoElementRef!: ElementRef<HTMLVideoElement>;
+  videoSrc = 'https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/video/Purple%20and%20White%20Modern%20Geometric%20Animated%20Youtube%20Channel%20Intro%20Video.mp4';
+
+
+  ngAfterViewInit() {
+  // Check if the banner has already been shown
+  const hasSeenPopup = localStorage.getItem('hasSeenPopupBanner');
+
+  if (!hasSeenPopup && this.filteredBanners.length > 0) {
+    this.currentIndex = 0;
+    this.currentBanner = this.filteredBanners[this.currentIndex];
+
+    this.modalInstance = new bootstrap.Modal(this.heightModal.nativeElement, {
+      backdrop: 'static',
+      keyboard: false
+    });
+
+    this.modalInstance.show();
+    this.setupTimer(); // Setup timer for first banner
+
+    // Set flag so it doesn't show again
+    localStorage.setItem('hasSeenPopupBanner', 'true');
+  }
+  const videoEl = this.videoElementRef.nativeElement;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Video is in view — play and unmute
+            videoEl.muted = false;
+            videoEl.play().catch((err) => console.warn('Play failed:', err));
+          } else {
+            // Video is out of view — pause and mute
+            videoEl.pause();
+            videoEl.muted = true;
+          }
+        });
+      },
+      {
+        threshold: 0.7 // 30% of video must be visible to play
+      }
+    );
+
+    observer.observe(videoEl);
+if(hasSeenPopup != 'true'){
+  this.getPopBannerList();
+
+}
+  this.getMMiddleBannerList();
+}
+
+  getPopBannerList() {
+    this.ProductService.GetPopBanner(this.HubId).subscribe({
+      next: (res: any) => {
+        this.PopBanner = res;
+      },
+      error: (err) => {
+        this.app.commonLoader = false;
+        this.app.pageLoader = false;
+        console.error(err);
+      },
+      complete: () => {
+        this.filteredBanners = this.PopBanner.filter(b => !b.banner_TriggerId.startsWith('B'));
+
+        if (this.filteredBanners.length > 0) {
+          this.currentIndex = 0;
+          this.currentBanner = this.filteredBanners[this.currentIndex];
+          this.modalInstance = new bootstrap.Modal(this.heightModal.nativeElement);
+          this.modalInstance.show();
+          this.setupTimer(); // Setup timer for the shown banner
+        }
+
+        this.getMMiddleBannerList();
+      },
+    });
+  }
+
+  showNextBanner() {
+    this.currentIndex++;
+
+    if (this.currentIndex < this.filteredBanners.length) {
+      this.currentBanner = this.filteredBanners[this.currentIndex];
+      this.modalInstance.show();
+      this.setupTimer(); // Re-setup timer for next banner
+    } else {
+      this.modalInstance.hide();
+      this.currentBanner = null;
+      this.clearTimer(); // Clear the timer on close
+    }
+  }
+
+  onBannerClick(triggerId: string) {
+    this.getAllCategory(triggerId);
+    this.showNextBanner();
+  }
+
+setupTimer() {
+  this.clearTimer(); // clear any previous timers
+
+  const today = new Date();
+  const isWednesday = today.getDay() === 3; // 3 = Wednesday (your code says 6, which is Saturday!)
+
+  if (this.currentBanner?.banner_Name === 'Wild Wednesday' && isWednesday) {
+    this.showTimer = true;
+
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999);
+
+    this.interval = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = endOfDay.getTime() - now;
+
+      if (distance <= 0) {
+        this.timer = {
+          days: '00',
+          hours: '00',
+          minutes: '00',
+          seconds: '00'
+        };
+        this.clearTimer();
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      this.timer = {
+        days: this.pad(days),
+        hours: this.pad(hours),
+        minutes: this.pad(minutes),
+        seconds: this.pad(seconds)
+      };
+    }, 1000);
+  } else {
+    this.showTimer = false;
+  }
+}
+
+  pad(num: number): string {
+    return num < 10 ? '0' + num : num.toString();
+  }
+
+  clearTimer() {
+    if (this.interval) {
+      clearInterval(this.interval);
+      this.interval = null;
+    }
+  }
+
+  ngOnDestroy() {
+    this.clearTimer();
+  }
+
+
+
 
   createdBy: any = this.activatedRoute.snapshot.params['userId'];
   maincatId: any = this.activatedRoute.snapshot.params['mncatId'];
   selectedlanguage: any = 'English';
-  HubId: any = 'HID01';
+  // HubId: any = 'HID01';
   varianceindex: any = 0;
 
   modalPatch: boolean = false;
   isProductOutOfStock: boolean = false;
 
   topBanner: BannerDTOs[] = [];
-  bottomBanner: BannerDTOs[] = [];
+   bottomBanner: BannerDTOs[] = [];
   middlewareBanner: BannerDTOs[] = [];
+  communityBanner: BannerDTOs[] = [];
   userdetails: any = [];
   Hub: any = [];
   DefultAdd: any = [];
@@ -104,7 +294,7 @@ export class HomeComponent {
   bottomBannerSlider = {
     infinite: true,
     centerMode: true,
-    centerPadding: '50px',
+    centerPadding: '20px',
     slidesToShow: 3,
     autoplay: true,
     autoplaySpeed: 2000,
@@ -150,6 +340,19 @@ export class HomeComponent {
       this.getTopBannerList();
     }
   }
+  placeholderText: string = "";
+  placeholders: string[] = [
+    "Search for Fish Feed",
+    "Search for Fish Accessories",
+    "Search for Fish Bowl",
+    "Search for Aquarium Plants",
+    "Search for Aquarium Filters",
+    "Search for Water Conditioners",
+    "Search for Aquarium Heaters"
+  ];
+  typingSpeed: number = 100; 
+  delayBetweenTexts: number = 1500; 
+  currentPlaceholderIndex: number = 0;
   /* NG ONININT */
   ngOnInit() {
     if (this.app.ReturnParam[this.app.ReturnParam.length - 1]?.url != this.router.url) {
@@ -162,6 +365,47 @@ export class HomeComponent {
       sessionStorage.setItem("navlinkParam", JSON.stringify(this.navlink));
     }
     window.addEventListener('scroll', this.onScroll.bind(this));
+    this.startTypingAnimation();
+  }
+  startTypingAnimation() {
+    this.typeText();
+  }
+  typeText() {
+    let index = 0;
+    this.placeholderText = ""; // Clear previous text
+    const currentText = this.placeholders[this.currentPlaceholderIndex];
+
+    const typingInterval = setInterval(() => {
+      if (index < currentText.length) {
+        this.placeholderText += currentText.charAt(index);
+        index++;
+      } else {
+        clearInterval(typingInterval);
+
+        // Wait for a bit before deleting and switching to the next text
+        setTimeout(() => {
+          this.deleteText();
+        }, this.delayBetweenTexts);
+      }
+    }, this.typingSpeed);
+  }
+
+  deleteText() {
+    const deletingInterval = setInterval(() => {
+      if (this.placeholderText.length > 0) {
+        this.placeholderText = this.placeholderText.slice(0, -1);
+      } else {
+        clearInterval(deletingInterval);
+
+        // Move to the next placeholder
+        this.currentPlaceholderIndex = (this.currentPlaceholderIndex + 1) % this.placeholders.length;
+
+        // Start typing next text
+        setTimeout(() => {
+          this.typeText();
+        }, 500);
+      }
+    }, 50);
   }
 
   onScroll(): void {
@@ -270,6 +514,20 @@ export class HomeComponent {
         this.app.pageLoader = false;
         // console.log(err);
       }, complete: () => {
+        this.getCCommunityBanner();
+      },
+    });
+  }
+  getCCommunityBanner() {
+    this.ProductService.GetCommunityBanner(this.HubId).subscribe({
+      next: (res: any) => {
+        this.communityBanner = res;
+        console.log("this.communityBanner", this.communityBanner);
+      }, error: (err) => {
+        this.app.commonLoader = false;
+        this.app.pageLoader = false;
+        // console.log(err);
+      }, complete: () => {
         this.getMainCategory();
       },
     });
@@ -346,6 +604,7 @@ export class HomeComponent {
 
   /* PRODDUCT DETAILS */
   proddetails(itemId: any) {
+    
     this.ProductService.getProductDetail(itemId, this.createdBy).subscribe({
       next: (data) => {
         this.cartlist = data;
@@ -418,6 +677,11 @@ export class HomeComponent {
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
   }
+
+
+
+ 
+
 
   handleAutoPlay(videoElement: HTMLVideoElement): void {
     if (this.isInViewport(videoElement)) {
@@ -650,4 +914,5 @@ export class HomeComponent {
       });
     }
   }
+
 }

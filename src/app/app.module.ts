@@ -64,9 +64,12 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ProductsComponent } from './category/products/products.component';
 import { SafePipe } from './safepipe';
 import { VideoPlayOnScrollDirective } from './video-play-on-scroll.directive';
+import { AIComponent } from './ai/ai.component';
+import { CustomisePageComponent } from './customise-page/customise-page.component';
 @NgModule({
   declarations: [
     AppComponent,
+    AIComponent,
     SignInComponent,
     HomeComponent,
     CategoryComponent,
@@ -112,7 +115,9 @@ import { VideoPlayOnScrollDirective } from './video-play-on-scroll.directive';
     BundleOfferComponent,
     BagaOfferComponent,
     SafePipe,
-    VideoPlayOnScrollDirective
+    VideoPlayOnScrollDirective,
+    AIComponent,
+    CustomisePageComponent
   ],
   imports: [
   BrowserModule,

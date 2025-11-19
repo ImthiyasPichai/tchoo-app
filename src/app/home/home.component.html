@@ -8,7 +8,7 @@
             <div class="modal-content position-relative bg-white" *ngIf="currentBanner" style="border-radius: 8px;">
                 <div class="modal-body text-center p-0 position-relative">
                     <!-- Close icon -->
-                    <button type="button" class="button-close position-absolute" style="top: 0px; right: 2px; z-index: 2; color: #f3f3f3;font-size: x-large;" aria-label="Close" (click)="showNextBanner()">
+                    <button type="button" (click)="closemode()" class="button-close position-absolute" style="top: 0px; right: 2px; z-index: 2; color: #f3f3f3;font-size: x-large;" aria-label="Close" (click)="showNextBanner()">
                         <span aria-hidden="true"><i class="fa-solid fa-xmark"></i></span>
                     </button>
 
@@ -89,20 +89,21 @@
             </div>
         </div>
         <!-- COMMON SEARCH BOX -->
-        <div class="common-search-box gap-2">
-            <div class="common-search-input w-100">
+        <div class="common-search-box gap-2" style="border-color: red;">
+            <div class="common-search-input w-100" style="border-color: red;">
 
                 <form (ngSubmit)="search()" style="background-color: #f2f8f9 ;">
-                    <span  class="search-icon" alt="search" ><i class="fa-solid fa-magnifying-glass"></i>        </span>
-            <input type="text" [placeholder]="placeholderText" name="searchValue" id="searchValue" [(ngModel)]="searchValue" />
+                    <span  class="search-icon" alt="search" ><i class="fa-solid fa-magnifying-glass"></i>       </span>
+            <input  style="border-color: red;" type="text" [placeholder]="placeholderText" name="searchValue" id="searchValue" [(ngModel)]="searchValue" />
                 </form>
 
-                <div style="display: none;">{{transcript$ | async}}</div>
+                <div style="display: block;"> </div>
             </div>
-            <a href="/AI/{{createdBy}}" [routerLinkActive]="['is-active']">
+          
+            <!-- <a href="/AI/{{createdBy}}" [routerLinkActive]="['is-active']">
                 <i class="fa-solid fa-robot"></i>
 
-            </a>
+            </a> -->
             <!-- <a href="#" class="sort-filter">
         <img src="/assets/img/icons/sort-filters.png" alt="filter" />
     </a> -->
@@ -146,19 +147,33 @@
 
         <div>
             <div class="banner-slider-wrapper">
-                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="categorySlider">
-                    <div ngxSlickItem class="slide" *ngFor="let mainCategory of getmaincategory">
-
-                        <div class="category-img-wrapper">
-                            <div class="clickable" (click)="getAllCategory(mainCategory.mainCategoryId)">
-                                <div class="category-img">
-                                    <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/category-images/{{mainCategory.mainCategoryId}}.png" onerror="this.onerror=null; this.src='assets/img/category/no-image.png'" alt="items" width="100%" />
-                                </div>
-                                <h5 class="text-center text-bold-600" style="color: #1e1e1e ;">{{mainCategory.name}}</h5>
-                            </div>
-                        </div>
-                    </div>
-                </ngx-slick-carousel>
+               <ngx-slick-carousel
+  #slickModal="slick-carousel"
+  class="carousel"
+  [config]="categorySlider"
+>
+  <div
+  ngxSlickItem
+  class="slide"
+  *ngFor="let mainCategory of getmaincategory; trackBy: trackByCategory"
+>
+    <div
+      class="category-item"
+      (click)="getAllCategory(mainCategory.mainCategoryId)"
+    >
+      <div class="category-img-wrapper">
+        <div class="category-img">
+          <img
+            [src]="'https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/category-images/' + mainCategory.mainCategoryId + '.png'"
+            (error)="onImageError($event)"
+            alt="items"
+          />
+        </div>
+        <h5 class="text-center">{{ mainCategory.name }}</h5>
+      </div>
+    </div>
+  </div>
+</ngx-slick-carousel>
 
                 <!-- <div class="row">
     <div class="col-6 col-md-4 col-lg-2" *ngFor="let mainCategory of getmaincategory"
@@ -195,7 +210,6 @@
     muted
     autoplay
     playsinline
-    style="border-radius: 8px;"
   >
     Your browser does not support the video tag.
   </video>
@@ -291,7 +305,7 @@
     <app-recentlyviewed></app-recentlyviewed>
     <div class="banner-slider-wrapper middle-banner">
 
-        <div class="slide" *ngFor="let baner of middlewareBanner">
+    <div class="slide" *ngFor="let baner of middlewareBanner">
             <div *ngIf="baner.banner_TriggerId.substring(0,3)!='MNC'">
                 <div class="banner-img mb-2" style="width: 100%;">
                     <a (click)="proddetails(baner.banner_TriggerId)">
@@ -311,7 +325,8 @@
         </div>
       </div> -->
         </div>
-    </div>
+
+  </div>
 
     <!-- BOTTOM BANNER -->
     <div class="bottom-banner-slider">
@@ -340,11 +355,8 @@
       </div> -->
             <div ngxSlickItem class="slide" *ngFor="let image of feature">
                 <div class="image-wrapper" style="background-color: #ffff;">
-
-
                     <a href="/Main-Category/SubCategory/Category/Products/{{image.itemId}}/{{image.mainCategory}}/{{createdBy}}/{{HubId}}/asc/0/0">
                         <img style="background-color: #ffff;" src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/Product-image/{{image.itemId}}_0.png" alt="Banner Image" />
-
                     </a>
                     <div>
                         <h3 class="product-title">{{image.pluName}}</h3>
@@ -397,7 +409,7 @@
         <div style="padding-top: 2px;" class="slide" *ngFor="let baner of communityBanner">
             <div *ngIf="baner.banner_TriggerId.substring(0,3)!='POPUP'" style="padding: 5px 2px;">
                 <div class="banner-img mb-2" style="width: 100%;">
-                    <a [href]="'http://BubbleUp-url.com'" target="_blank">
+                    <a (click)="getAllCategory(baner.banner_TriggerId)"> 
                         <img src="https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/top-banner/{{baner.bannerId}}.png" alt="baner" width="100%" />
                     </a>
                 </div>

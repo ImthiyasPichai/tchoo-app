@@ -46,6 +46,7 @@ import { BagaOfferComponent } from './offers/baga-offer/baga-offer.component';
 import { BulkOfferComponent } from './offers/bulk-offer/bulk-offer.component';
 import { AIComponent } from './ai/ai.component';
 import { CustomisePageComponent } from './customise-page/customise-page.component';
+import { BubbleUpComponent } from './bubble-up/bubble-up.component';
 
 const routes: Routes = [
   { path: 'splash-screen', component: SplashScreenComponent },
@@ -71,6 +72,9 @@ const routes: Routes = [
   { path: 'offers/baga-offer/:userId/:HubId', component: BagaOfferComponent },
   { path: 'offers/bulk-offer/:userId/:HubId', component: BulkOfferComponent },
 
+ 
+  /*  Bubble up  */
+    { path: 'Bubbleup/:userId/:HubId', component: BubbleUpComponent },
 
   /* SETTING MODULES */
   { path: 'Account/:userId/:HubId', component: AccountListComponent },

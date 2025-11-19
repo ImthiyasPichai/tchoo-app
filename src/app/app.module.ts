@@ -66,6 +66,7 @@ import { SafePipe } from './safepipe';
 import { VideoPlayOnScrollDirective } from './video-play-on-scroll.directive';
 import { AIComponent } from './ai/ai.component';
 import { CustomisePageComponent } from './customise-page/customise-page.component';
+import { BubbleUpComponent } from './bubble-up/bubble-up.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -117,7 +118,8 @@ import { CustomisePageComponent } from './customise-page/customise-page.componen
     SafePipe,
     VideoPlayOnScrollDirective,
     AIComponent,
-    CustomisePageComponent
+    CustomisePageComponent,
+    BubbleUpComponent
   ],
   imports: [
   BrowserModule,

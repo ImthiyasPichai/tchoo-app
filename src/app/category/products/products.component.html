@@ -49,7 +49,7 @@
     <div class="ribbon-box-wrapper" *ngIf="cartlist?.product?.offers?.length == 1">
       <div class="ribbon" *ngIf="cartlist?.product?.offers?.[0]?.offerTypes === '1'">
         <span>
-          {{ (((cartlist?.product?.manufracture - cartlist?.pricelist?.sellingPrice) / cartlist?.product?.manufracture)
+          {{ (((cartlist?.product?.manufracture  - cartlist?.pricelist[0]?.sellingPrice) / cartlist?.product?.manufracture)
           * 100) | number: '1.0-0' }}% OFF
         </span>
       </div>

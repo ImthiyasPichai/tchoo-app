@@ -135,7 +135,7 @@
           border: 0;
           padding: 0 60px;
           box-sizing: border-box;
-         border-color: #00525b;
+         border-color: #00525b !important;
 
           &::placeholder {
             color: #5b5858;
@@ -172,68 +172,100 @@
   .banner-slider-wrapper {
     padding: 0;
     overflow-x: hidden;
+.carousel {
+  .slide {
+    padding: 0 5px;
+    .category-item {
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
 
-    .slick-slider {
-      width: 100%;
-      background-color: transparent;
-      pointer-events: auto !important;
-
-      .slick-track {
-        display: flex;
-        align-items: flex-start;
-        flex-wrap: nowrap;
-        height: 10px;
-        justify-content: center;
-      }
-
-      .slick-slide {
-        vertical-align: middle;
-        padding: 1px 0px;
-        margin: 10px;
-        transition: all 0.3s ease;
-        height: auto;
+      .category-img-wrapper {
         text-align: center;
-        margin-bottom: 0;
-        margin-top: 0;
-
-        // &.slick-current,
-        // &.slick-center {
-        //     padding: 5px 0px;
-        // }
-
-        .banner-img {
-          height: 160px;
+        .category-img {
+          width: 80px;
+          height: 80px;
+          margin: auto;
+          border-radius: 50%;
           overflow: hidden;
-          border-radius: 1px;
-
           img {
-            height: 100%;
             width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-radius: 10px;
-          }
-        }
-        .clickable {
-          cursor: pointer;
-        }
-        .category-img-wrapper {
-          position: relative;
-          z-index: 10;
-          .category-img {
-            width: 80px;
-            height: 80px;
             border-radius: 50%;
-            overflow: hidden;
-
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-            }
           }
+        }
+        h5 {
+          font-size: 14px;
+          margin-top: 5px;
         }
       }
     }
+  }
+}
+
+
+    // .slick-slider {
+    //   width: 100%;
+    //   background-color: transparent;
+    //   pointer-events: auto !important;
+
+    //   .slick-track {
+    //     display: flex;
+    //     align-items: flex-start;
+    //     flex-wrap: nowrap;
+    //     height: 10px;
+    //     justify-content: center;
+    //   }
+
+    //   .slick-slide {
+    //     vertical-align: middle;
+    //     padding: 1px 0px;
+    //     margin: 10px;
+    //     transition: all 0.3s ease;
+    //     height: auto;
+    //     text-align: center;
+    //     margin-bottom: 0;
+    //     margin-top: 0;
+
+    //     // &.slick-current,
+    //     // &.slick-center {
+    //     //     padding: 5px 0px;
+    //     // }
+
+    //     .banner-img {
+    //       height: 160px;
+    //       overflow: hidden;
+    //       border-radius: 1px;
+
+    //       img {
+    //         height: 100%;
+    //         width: 100%;
+    //         object-fit: cover;
+    //         border-radius: 10px;
+    //       }
+    //     }
+    //     .clickable {
+    //       cursor: pointer;
+    //     }
+    //     .category-img-wrapper {
+    //       position: relative;
+    //       z-index: 10;
+    //       .category-img {
+    //         width: 80px;
+    //         height: 80px;
+    //         border-radius: 50%;
+    //         overflow: hidden;
+
+    //         img {
+    //           width: 100%;
+    //           height: 100%;
+    //           object-fit: cover;
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
 
     &.sub-banner {
       background-color: #222222;
@@ -276,6 +308,51 @@
       }
     }
   }
+.live-marquee {
+  overflow: hidden;
+  width: 100%;
+  background: transparent;
+  white-space: nowrap;
+  margin: 5px 0;
+  position: relative;
+  height: 1.5rem;
+}
+
+.live-track {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.live-text-left {
+  animation: scroll-left 80s linear infinite;
+  color: red;
+  font-size: 1.0rem;
+}
+
+.live-text-right {
+  animation: scroll-right 80s linear infinite;
+  color: red;
+  font-size: 1.0rem;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
 
   /* BANNER SLIDER WRAPPER */
 
@@ -803,6 +880,7 @@
       }
     }
   }
+
 }
 
 @media only screen and (max-width: 1024px) {
@@ -919,6 +997,7 @@
   position: absolute;
   img {
     width: 39px;
+    padding-right: 12px;
   }
 }
 

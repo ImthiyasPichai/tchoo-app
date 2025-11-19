@@ -1,6 +1,7 @@
 .my-order-section {
     padding-bottom: 50px;
     overflow-y: auto;
+    height: calc(100vh - 90px);
     // width: 480px;
     // margin: 0 auto;
     // height: 100%;
@@ -128,7 +129,7 @@
                   }
                 }
                 .middle {
-                  margin-top: 15px;
+                 
                   h4 {
                     color: #666666;
                     font-weight: 500;
@@ -141,8 +142,10 @@
                 }
                 .bottom {
                   display: flex;
-                  margin-top: 15px;
                   align-items: center;
+                  position: absolute;
+                  right: 0;
+                  top: 15px;
                   justify-content: space-between;
                   .details-view {
                     color: #111111;

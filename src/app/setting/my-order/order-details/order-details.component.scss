@@ -1,14 +1,16 @@
 .order-details-section {
-    overflow-y: auto;
     height: 100%;
+    overflow: hidden;
     padding-bottom: 100px;
-    // width: 480px;
-    // margin: 0 auto;
-    // box-shadow: 0 10px 20px rgb(167 167 167 / 19%), 0 6px 6px rgb(131 131 131 / 23%);
+
+    .order-details-wrapper {
+        overflow-y: auto;
+        padding: 0 30px;
+        height: calc(100vh - 90px);
 
     /* ORDER ID VIEW */
     .order-id-view {
-        padding: 20px;
+        padding: 10px;
         border-top: 1px solid #f1f1f1;
         background-color: #ffffff;
 
@@ -23,7 +25,7 @@
     /* ORDER ITEMS WRAPPER */
     .order-items-wrapper {
         margin: 20px 0;
-        padding: 20px;
+        padding: 10px;
         background-color: #ffffff;
 
         .title {
@@ -274,9 +276,9 @@
 
     /* ORDER STATUS WRAPPER */
     .order-status-wrapper {
-        padding: 20px;
         display: flex;
         margin: 20px 0;
+        padding: 10px;
         align-items: center;
         justify-content: space-between;
         background-color: #ffffff;
@@ -316,7 +318,7 @@
 
     /* PAYMENT DETAILS */
     .payment-details-wrapper {
-        padding: 20px;
+        padding: 10px;
         background-color: #ffffff;
 
         h3 {
@@ -353,8 +355,8 @@
     /* ORDER SHIPPING DELIVERY */
     .order-shipping-delivery {
         background-color: #ffffff;
-        padding: 20px;
         margin-top: 20px;
+        padding: 10px;
 
         h3 {
             color: #00525b;
@@ -379,8 +381,8 @@
 
     /* PRODUCT DETAILS */
     .product-details {
-        padding: 20px;
         margin-top: 20px;
+        padding: 10px;
         background-color: #ffffff;
 
         h3 {
@@ -441,6 +443,7 @@
                 }
             }
         }
+    }
     }
 
     /* ORDER DETAILS BOTTOM */
@@ -522,5 +525,8 @@
         box-shadow: none;
         width: 100%;
         height: auto;
+        .order-details-wrapper {
+            padding: 20px;
+        }
     }
 }

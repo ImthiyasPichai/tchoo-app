@@ -6,7 +6,7 @@ import { ProductService } from '../_services/product/product.service';
 import { AppComponent } from 'src/app/app.component';
 import { BannerDTOs } from '../_common/DTOs/Home/BannerDTOs';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-
+import { SlickCarouselComponent } from 'ngx-slick-carousel';
 
 declare var bootstrap: any;
 @Component({
@@ -26,7 +26,7 @@ export class HomeComponent {
 
 
 
-
+@ViewChild('slickModal') slickModal!: SlickCarouselComponent;
   @ViewChild('heightModal') heightModal!: ElementRef;
 
   PopBanner: any[] = [];
@@ -46,10 +46,16 @@ timer = {
   timerValue = '';
   interval: any;
  @ViewChild('videoElement', { static: true }) videoElementRef!: ElementRef<HTMLVideoElement>;
-  videoSrc = 'https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/video/Purple%20and%20White%20Modern%20Geometric%20Animated%20Youtube%20Channel%20Intro%20Video.mp4';
+  videoSrc = 'https://automatebuddy.oss-ap-southeast-3.aliyuncs.com/VilliyantGroup/video/VID001.mp4';
 
 
   ngAfterViewInit() {
+    setTimeout(() => {
+    if (this.slickModal) {
+      this.slickModal.unslick(); // remove existing slick
+      this.slickModal.initSlick(); // re-initialize
+    }
+  }, 300);
   // Check if the banner has already been shown
   const hasSeenPopup = localStorage.getItem('hasSeenPopupBanner');
 
@@ -85,7 +91,7 @@ timer = {
         });
       },
       {
-        threshold: 0.7 // 30% of video must be visible to play
+        threshold: 1 // 30% of video must be visible to play
       }
     );
 
@@ -296,6 +302,7 @@ setupTimer() {
     centerMode: true,
     centerPadding: '20px',
     slidesToShow: 3,
+    slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
     dots: false,
@@ -348,6 +355,8 @@ setupTimer() {
     "Search for Aquarium Plants",
     "Search for Aquarium Filters",
     "Search for Water Conditioners",
+    "Search for Dog Feed",
+    "Search for Cat Feed",
     "Search for Aquarium Heaters"
   ];
   typingSpeed: number = 100; 
@@ -597,9 +606,36 @@ setupTimer() {
   getAllfeature() {
     window.location.href = '/featured-item/' + this.createdBy + '/' + this.HubId;
   }
+  loadMainCategories() {
+   this.getMainCategory() 
+
+    setTimeout(() => {
+      if (this.slickModal) {
+        this.slickModal.unslick();
+        this.slickModal.initSlick();
+      }
+    }, 300);
+  ;
+}
+
+  trackByCategory(index: number, item: any): any {
+  return item.mainCategoryId;
+}
+closemode()  {
+   localStorage.setItem('hasSeenPopupBanner', 'true');
+}
+
   /* GET CATEGORY nav*/
-  getAllCategory(id: any) {
-    window.location.href = 'Main-Category/SubCategory/ProductList/' + id + '/' + this.createdBy + '/' + this.HubId + '/asc/0/0';
+getAllCategory(id: any) {
+    debugger;
+    window.location.href =
+      'Main-Category/SubCategory/ProductList/' +
+      id +
+      '/' +
+      this.createdBy +
+      '/' +
+      this.HubId +
+      '/asc/0/0';
   }
 
   /* PRODDUCT DETAILS */

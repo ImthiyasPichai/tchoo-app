@@ -312,17 +312,38 @@ setupTimer() {
   }
 
   // CATEGORY SLIDER
-  categorySlider = {
-    infinite: true,
-    centerMode: true,
-    slidesToShow: 4,
-    dots: false,
-    arrows: true,
-    swipe: true,
-    autoplay: false,
-    autoplaySpeed: 2000,
-    swipeToSlide: true,
-  };
+ categorySlider = {
+  infinite: true,          
+  centerMode: false,       
+  slidesToShow: 4,          
+  slidesToScroll: 2,       
+  dots: false,
+  arrows: true,
+  swipe: true,
+  autoplay: true,           
+  autoplaySpeed: 2000,     
+  swipeToSlide: true,
+  variableWidth: false,   
+  responsive: [
+    {
+      breakpoint: 0,
+      settings: { slidesToShow: 4 }
+    },
+    {
+      breakpoint: 0,
+      settings: { slidesToShow: 3 }
+    },
+    {
+      breakpoint: 0,
+      settings: { slidesToShow: 2 }
+    },
+    {
+      breakpoint: 0,
+      settings: { slidesToShow: 1 }
+    }
+  ]
+};
+
 
   onImageError(event: Event) {
     const target = event.target as HTMLImageElement;
@@ -398,6 +419,10 @@ setupTimer() {
       }
     }, this.typingSpeed);
   }
+onSlickInit() {
+  console.log("Slick initialized!");
+  // optionally re-enable clicks or force change detection
+}
 
   deleteText() {
     const deletingInterval = setInterval(() => {

@@ -83,6 +83,8 @@
     /* MY ORDER WRAPPER */
     .my-order-wrapper {
         padding: 10px;
+        height: 100%;
+        overflow-y: auto;
         .my-order-list {
           position: relative;
           margin-bottom: 10px;
